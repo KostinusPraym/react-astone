@@ -27,24 +27,27 @@ const Register = () => {
         dispatch(setUser(userTemplate));
         return userTemplate;
       })
-      .then(({ email, token, id }) => {
-        set(ref(db, "user"), {
-          email,
-          token,
-          id,
-        });
+      .then((user) => {
+        set(ref(db, "user"), user);
+        navigate("/");
       })
-      .finally(() => navigate("/"))
       .catch((err) => alert(err));
   };
 
   return (
-    <div className={styles.wrapper}>
-      <h1>Registration:</h1>
-      <Form title="Register" handleClick={handleRegister} />
-      <Link className={styles.registerLink} to="/login">
-        or login
-      </Link>
+    <div className={styles.register}>
+      <div className={styles.wrapper}>
+        <div className={styles.headerGroup}>
+          <h1>Sign Up:</h1>
+          <Link to="/">
+            <img className={styles.close} src="/images/close.svg" alt="close" />
+          </Link>
+        </div>
+        <Form handleClick={handleRegister} />
+        <Link className={styles.registerLink} to="/login">
+          or login
+        </Link>
+      </div>
     </div>
   );
 };

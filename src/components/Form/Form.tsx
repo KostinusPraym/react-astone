@@ -2,15 +2,15 @@ import React from "react";
 
 import styles from "./Form.module.scss";
 
-interface FormProps {
-  title: string;
+type Props = {
   handleClick: (email: string, password: string) => void;
-}
+};
 
-const Form: React.FC<FormProps> = ({ title, handleClick }) => {
+const Form: React.FC<Props> = ({ handleClick }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
+  // TODO
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
     if (event.target.id === "email") {
       setEmail(event.target.value);
@@ -39,7 +39,7 @@ const Form: React.FC<FormProps> = ({ title, handleClick }) => {
         className={styles.submit}
         onClick={() => handleClick(email, password)}
       >
-        {title}
+        Submit
       </button>
     </form>
   );

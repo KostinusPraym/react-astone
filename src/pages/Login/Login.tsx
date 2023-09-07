@@ -15,7 +15,7 @@ const Login = () => {
   const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
     const db = getDatabase();
-    
+
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         const userTemplate = {
@@ -24,29 +24,30 @@ const Login = () => {
           id: user.uid,
         };
 
-        dispatch(
-          setUser(userTemplate)
-        );
+        dispatch(setUser(userTemplate));
         return userTemplate;
       })
-      .then(({ email, token, id }) => {
-        set(ref(db, "user"), {
-          email,
-          token,
-          id,
-        });
+      .then((user) => {
+        set(ref(db, "user"), user);
+        navigate("/");
       })
-      .finally(() => navigate("/"))
       .catch((err) => alert("Invalid User"));
   };
 
   return (
-    <div className={styles.wrapper}>
-      <h1>Login:</h1>
-      <Form title="Login" handleClick={handleLogin} />
-      <Link className={styles.registerLink} to="/register">
-        or register
-      </Link>
+    <div className={styles.login}>
+      <div className={styles.wrapper}>
+        <div className={styles.headerGroup}>
+          <h1>Sign In:</h1>
+          <Link to="/">
+            <img className={styles.close} src="/images/close.svg" alt="close" />
+          </Link>
+        </div>
+        <Form handleClick={handleLogin} />
+        <Link className={styles.registerLink} to="/register">
+          or register
+        </Link>
+      </div>
     </div>
   );
 };
