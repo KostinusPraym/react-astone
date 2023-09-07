@@ -10,25 +10,16 @@ const Form: React.FC<Props> = ({ handleClick }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  // TODO
-  function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    if (event.target.id === "email") {
-      setEmail(event.target.value);
-    } else {
-      setPassword(event.target.value);
-    }
-  }
-
   return (
     <form onSubmit={(e) => e.preventDefault()} className={styles.form}>
       <div className={styles.inputGroup}>
         <label htmlFor="email">Type e-mail</label>
-        <input onChange={changeHandler} id="email" type="email" value={email} />
+        <input onChange={(e) => setEmail(e.target.value)} id="email" type="email" value={email} />
       </div>
       <div className={styles.inputGroup}>
         <label htmlFor="password">Type password</label>
         <input
-          onChange={changeHandler}
+          onChange={(e) => setPassword(e.target.value)}
           id="password"
           type="password"
           value={password}

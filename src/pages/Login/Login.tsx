@@ -14,8 +14,7 @@ const Login = () => {
 
   const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
-    const db = getDatabase();
-
+   
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         const userTemplate = {
@@ -28,6 +27,7 @@ const Login = () => {
         return userTemplate;
       })
       .then((user) => {
+        const db = getDatabase();
         set(ref(db, "user"), user);
         navigate("/");
       })

@@ -12,10 +12,10 @@ import styles from "./Register.module.scss";
 const Register = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const auth = getAuth();
-  const db = getDatabase();
-
+  
   const handleRegister = (email: string, password: string) => {
+    const auth = getAuth();
+    
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         const userTemplate = {
@@ -28,6 +28,7 @@ const Register = () => {
         return userTemplate;
       })
       .then((user) => {
+        const db = getDatabase();
         set(ref(db, "user"), user);
         navigate("/");
       })
