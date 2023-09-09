@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import toast from "react-hot-toast";
 
 import Form from "../../components/Form/Form";
-import { setUser } from "../../store/slices/userSlice";
 import { useAppDispatch } from "../../hooks/redux-hooks";
+import { loginActions } from "../../store/actions/authActions";
 
 import styles from "./Login.module.scss";
 
@@ -12,26 +11,17 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = (email: string, password: string) => {
-    const auth = getAuth();
-   
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        const userTemplate = {
-          email: user.email,
-          token: user.refreshToken,
-          id: user.uid,
-        };
+  const handleLogin = async (email: string, password: string) => {
+    try {
+      const user = await dispatch(loginActions({ email, password }));
 
-        dispatch(setUser(userTemplate));
-        return userTemplate;
-      })
-      .then((user) => {
-        const db = getDatabase();
-        set(ref(db, "user"), user);
+      if (user.type === "auth/login/fulfilled") {
         navigate("/");
-      })
-      .catch((err) => alert("Invalid User"));
+      }
+    } catch (error) {
+      const typedError = error as Error;
+      toast.error(typedError.message);
+    }
   };
 
   return (
