@@ -1,6 +1,5 @@
 import React from "react";
-import { getDatabase, ref, child, get } from "firebase/database";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -10,24 +9,24 @@ import Register from "./pages/Register/Register";
 import { setUser } from "./store/slices/userSlice";
 import { useAppDispatch } from "./hooks/redux-hooks";
 import Layout from "./components/Layout/Layout";
+import { getUser } from "./store/actions/authActions";
 
 function App() {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
-    const dbRef = ref(getDatabase());
-    get(child(dbRef, "user"))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          dispatch(setUser(snapshot.val()));
-        }
+    (async function () {
+      try {
+        const user = await dispatch(getUser());
+        dispatch(setUser(user.payload));
         setIsLoading(true);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+      } catch (error) {
+        const typedError = error as Error;
+        toast.error(typedError.message);
+      }
+    })();
+  }, [dispatch]);
 
   return (
     <div className="app">
