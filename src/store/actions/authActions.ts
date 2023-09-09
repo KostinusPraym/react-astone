@@ -57,6 +57,8 @@ export const getUser = createAsyncThunk(
       const snapshot = await get(child(dbRef, "user"));
       if (snapshot.exists()) {
         return snapshot.val();
+      } else {
+        return { email: null };
       }
     } catch (error) {
       toast.error("Error Login");
