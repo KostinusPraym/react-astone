@@ -1,38 +1,28 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { toast } from "react-hot-toast";
 
 import Form from "../../components/Form/Form";
-import { setUser } from "../../store/slices/userSlice";
 import { useAppDispatch } from "../../hooks/redux-hooks";
+import { registrationAction } from "../../store/actions/authActions";
 
 import styles from "./Register.module.scss";
 
 const Register = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  
-  const handleRegister = (email: string, password: string) => {
-    const auth = getAuth();
-    
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        const userTemplate = {
-          email: user.email,
-          token: user.refreshToken,
-          id: user.uid,
-        };
 
-        dispatch(setUser(userTemplate));
-        return userTemplate;
-      })
-      .then((user) => {
-        const db = getDatabase();
-        set(ref(db, "user"), user);
+  const handleRegister = async (email: string, password: string) => {
+    try {
+      const user = await dispatch(registrationAction({ email, password }));
+
+      if (user.type === "auth/registration/fulfilled") {
         navigate("/");
-      })
-      .catch((err) => alert(err));
+      }
+    } catch (error) {
+      const typedError = error as Error;
+      toast.error(typedError.message);
+    }
   };
 
   return (

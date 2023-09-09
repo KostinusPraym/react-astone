@@ -1,5 +1,6 @@
 import React from "react";
 import { getDatabase, ref, child, get } from "firebase/database";
+import { Toaster } from "react-hot-toast";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -13,7 +14,7 @@ import Layout from "./components/Layout/Layout";
 function App() {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = React.useState(false);
-  
+
   React.useEffect(() => {
     const dbRef = ref(getDatabase());
     get(child(dbRef, "user"))
@@ -30,8 +31,9 @@ function App() {
 
   return (
     <div className="app">
+      <Toaster />
       <Routes>
-        <Route path="/" element={<Layout isLoading={isLoading}/>}>
+        <Route path="/" element={<Layout isLoading={isLoading} />}>
           <Route index element={<Home />}></Route>
           <Route path="/search-page" element={<h1>search-page</h1>}></Route>
           <Route path="/card-page" element={<h1>card-page</h1>}></Route>

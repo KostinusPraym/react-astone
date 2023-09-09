@@ -7,7 +7,7 @@ import App from "./App";
 import { store } from "./store";
 import "./index.css";
 import "../src/reset.css";
-import "./firebase";
+import "./firebase.config";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
