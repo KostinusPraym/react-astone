@@ -3,11 +3,8 @@ import { ref, set } from "firebase/database";
 
 import { db } from "../../firebase.config";
 
-
 const initialState = {
   email: null,
-  token: null,
-  id: null,
 };
 
 const userSlice = createSlice({
@@ -16,17 +13,13 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, actions) {
       state.email = actions.payload.email;
-      state.token = actions.payload.token;
-      state.id = actions.payload.id;
     },
 
     removeUser(state) {
       state.email = null;
-      state.token = null;
-      state.id = null;
     },
 
-    saveUser(state, actions) {
+    saveUser(_, actions) {
       set(ref(db, "user"), { email: actions.payload });
     },
   },
