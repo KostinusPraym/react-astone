@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import Form from "../../components/Form/Form";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 import { registrationAction } from "../../store/actions/authActions";
+import { saveUser } from "../../store/slices/userSlice";
 
 import styles from "./Register.module.scss";
 
@@ -17,6 +18,7 @@ const Register = () => {
       const user = await dispatch(registrationAction({ email, password }));
 
       if (user.type === "auth/registration/fulfilled") {
+        dispatch(saveUser(email));
         navigate("/");
       }
     } catch (error) {

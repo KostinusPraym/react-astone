@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import Form from "../../components/Form/Form";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 import { loginActions } from "../../store/actions/authActions";
+import { saveUser } from "../../store/slices/userSlice";
 
 import styles from "./Login.module.scss";
 
@@ -16,6 +17,7 @@ const Login = () => {
       const user = await dispatch(loginActions({ email, password }));
 
       if (user.type === "auth/login/fulfilled") {
+        dispatch(saveUser(email));
         navigate("/");
       }
     } catch (error) {
