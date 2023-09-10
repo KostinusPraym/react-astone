@@ -1,5 +1,6 @@
 import React from "react";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -9,11 +10,12 @@ import Register from "./pages/Register/Register";
 import { setUser } from "./store/slices/userSlice";
 import { useAppDispatch } from "./hooks/redux-hooks";
 import Layout from "./components/Layout/Layout";
-import { getUser } from "./store/actions/authActions";
+import { fetchData, getUser } from "./store/actions/authActions";
 
 function App() {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [items, setItems] = React.useState([]);
 
   React.useEffect(() => {
     (async function () {
@@ -28,12 +30,24 @@ function App() {
     })();
   }, [dispatch]);
 
+  React.useEffect(() => {
+    (async function () {
+      try {
+        const data = await dispatch(fetchData());
+        setItems(data.payload);
+      } catch (error) {
+        const typedError = error as Error;
+        toast.error(typedError.message);
+      }
+    })();
+  }, [dispatch]);
+
   return (
     <div className="app">
       <Toaster />
       <Routes>
         <Route path="/" element={<Layout isLoading={isLoading} />}>
-          <Route index element={<Home />}></Route>
+          <Route path="/" element={<Home items={items} />}></Route>
           <Route path="/search-page" element={<h1>search-page</h1>}></Route>
           <Route path="/card-page" element={<h1>card-page</h1>}></Route>
           <Route path="/history-page" element={<h1>history-page</h1>}></Route>

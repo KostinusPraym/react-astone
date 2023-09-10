@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { child, get } from "firebase/database";
+import axios from "axios";
 
 import {
   createUserWithEmailAndPassword,
@@ -62,6 +63,25 @@ export const getUser = createAsyncThunk(
       }
     } catch (error) {
       toast.error("Error Login");
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const fetchData = createAsyncThunk(
+  "auth/getData",
+  async (_, { rejectWithValue }) => {
+    try {
+      const URL = "https://64fb0783cb9c00518f7a8b10.mockapi.io/records/";
+      const response = await axios.get(URL);
+      if (response.statusText) {
+        return response.data;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      const typedError = error as Error;
+      toast.error(typedError.message);
       return rejectWithValue(error);
     }
   }
