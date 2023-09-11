@@ -3,8 +3,8 @@ import toast from "react-hot-toast";
 
 import Form from "../../components/Form/Form";
 import { useAppDispatch } from "../../hooks/redux-hooks";
-import { loginActions } from "../../store/actions/authActions";
-import { saveUser, setUser } from "../../store/slices/userSlice";
+import { loginActions } from "../../redux/actions/authActions";
+import { saveUser, setUser } from "../../redux/slices/userSlice";
 
 import styles from "./Login.module.scss";
 
@@ -18,7 +18,7 @@ const Login = () => {
 
       if (user.type === "auth/login/fulfilled") {
         dispatch(saveUser(email));
-        dispatch(setUser({email}));
+        dispatch(setUser({ email }));
         navigate("/");
       }
     } catch (error) {

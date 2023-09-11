@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import { store } from "./store";
+import { store } from "./redux";
 import "./index.css";
 import "../src/reset.css";
 import "./firebase.config";

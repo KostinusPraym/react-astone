@@ -4,7 +4,7 @@ import { getDatabase, ref, set } from "firebase/database";
 
 import { useAuth } from "../../hooks/use-auth";
 import { useAppDispatch } from "../../hooks/redux-hooks";
-import { removeUser } from "../../store/slices/userSlice";
+import { removeUser } from "../../redux/slices/userSlice";
 
 import styles from "./Header.module.scss";
 

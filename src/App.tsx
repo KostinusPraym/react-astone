@@ -7,10 +7,11 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import { setUser } from "./store/slices/userSlice";
+import { setUser } from "./redux/slices/userSlice";
 import { useAppDispatch } from "./hooks/redux-hooks";
 import Layout from "./components/Layout/Layout";
-import { fetchData, getUser } from "./store/actions/authActions";
+import { getUser } from "./redux/actions/authActions";
+import { fetchData } from "./redux/actions/fetchActions";
 
 function App() {
   const dispatch = useAppDispatch();
