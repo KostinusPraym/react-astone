@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <header>
       <Link className={styles.logoGroup} to="/">
-        <img src="./images/logo.png" alt="logo" />
+        <img src="/images/logo.png" alt="logo" />
         <p>Vinyl Music</p>
       </Link>
       {isAuth ? (

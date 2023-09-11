@@ -47,14 +47,15 @@ function App() {
       <Toaster />
       <Routes>
         <Route path="/" element={<Layout isLoading={isLoading} />}>
-          <Route path="/" element={<Home items={items} />}></Route>
+          <Route index element={<Home items={items} />}></Route>
           <Route path="/search-page" element={<h1>search-page</h1>}></Route>
-          <Route path="/card-page" element={<h1>card-page</h1>}></Route>
+          <Route path="/card/:id" element={<h1>card-page</h1>}></Route>
           <Route path="/history-page" element={<h1>history-page</h1>}></Route>
           <Route path="/favorite-page" element={<h1>favorite-page</h1>}></Route>
         </Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="*" element={<h1>Not Found</h1>}></Route>
       </Routes>
     </div>
   );
