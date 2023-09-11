@@ -1,8 +1,10 @@
 import React from "react";
 
+import Card from "../../components/Card/Card";
+
 import styles from "./Home.module.scss";
 
-type Item = {
+export type Item = {
   id: string;
   author: string;
   price: string;
@@ -19,7 +21,9 @@ type Props = {
 const Home: React.FC<Props> = ({ items }) => {
   return (
     <div className={styles.home}>
-
+      {items.map((item) => (
+        <Card {...item} />
+      ))}
     </div>
   );
 };
