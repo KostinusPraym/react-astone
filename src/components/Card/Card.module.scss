@@ -1,0 +1,22 @@
+.card {
+  width: 300px;
+  height: 350px;
+
+  img {
+    margin-bottom: 9px;
+  }
+
+  .author {
+    font-size: 18px;
+    margin-bottom: 7px;
+  }
+  .price {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 9px;
+  }
+  .genre {
+    font-size: 14px;
+    color: rgb(83, 83, 83);
+  }
+}

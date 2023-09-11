@@ -20,8 +20,9 @@ const Header = () => {
 
   return (
     <header>
-      <Link to="/">
+      <Link className={styles.logoGroup} to="/">
         <img src="./images/logo.png" alt="logo" />
+        <p>Vinyl Music</p>
       </Link>
       {isAuth ? (
         <div>
