@@ -34,7 +34,7 @@ export const registrationAction = createAsyncThunk(
   }
 );
 
-export const loginActions = createAsyncThunk(
+export const loginAction = createAsyncThunk(
   "auth/login",
   async ({ email, password }: RegistrationForm, { rejectWithValue }) => {
     try {
@@ -50,7 +50,7 @@ export const loginActions = createAsyncThunk(
   }
 );
 
-export const getUser = createAsyncThunk(
+export const getUserAction = createAsyncThunk(
   "auth/getUser",
   async (_, { rejectWithValue }) => {
     try {

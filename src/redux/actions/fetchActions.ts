@@ -21,4 +21,21 @@ export const fetchData = createAsyncThunk(
   }
 );
 
-
+export const fetchDataById = createAsyncThunk(
+  "fetch/getDataById",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const URL = `https://64fb0783cb9c00518f7a8b10.mockapi.io/records/${id}`;
+      const response = await axios.get(URL);
+      if (response.statusText) {
+        return response.data;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      const typedError = error as Error;
+      toast.error(typedError.message);
+      return rejectWithValue(error);
+    }
+  }
+);
