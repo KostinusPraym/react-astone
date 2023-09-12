@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import Form from "../../components/Form/Form";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 import { registrationAction } from "../../redux/actions/authActions";
-import { saveUser, setUser } from "../../redux/slices/userSlice";
+import { saveUser, setUser } from "../../redux/slices/authSlice";
 
 import styles from "./Register.module.scss";
 

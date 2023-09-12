@@ -1,0 +1,51 @@
+.singleCard {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  .optionsGroup {
+    display: flex;
+    gap: 40px;
+
+    .imageGroup {
+      position: relative;
+
+      button {
+        position: absolute;
+        display: none;
+        width: 100%;
+        font-size: 14px;
+        padding: 20px 0;
+        background-color: rgba(0, 0, 0, 0.689);
+        color: white;
+        bottom: 0;
+        left: 0;
+      }
+
+      &:hover {
+        opacity: 0.9;
+        button {
+          display: block;
+        }
+      }
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      
+      div {
+        display: flex;
+      }
+      div > p:first-child {
+        width: 180px;
+        font-weight: 700;
+      }
+    }
+  }
+}

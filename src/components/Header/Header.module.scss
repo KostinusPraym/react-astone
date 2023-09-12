@@ -7,14 +7,13 @@ header {
   border-bottom: 1px solid black;
   padding: 20px 0;
 
-  .logoGroup{
+  .logoGroup {
     display: flex;
     align-items: center;
     gap: 15px;
   }
 
-  .login,
-  .out {
+  a:last-child {
     border: 1px solid black;
     padding: 4px 0;
     width: 90px;
