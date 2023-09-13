@@ -17,8 +17,11 @@ export type Vinyl = {
 };
 
 const Home = () => {
-  const { data: vinyls = [] } = useGetVinylsQuery();
+  const { data: vinyls = [], isLoading } = useGetVinylsQuery();
 
+  if (isLoading) {
+    return <img className="loader" src="/images/eclipse.gif" alt="loader" />;
+  }
   return (
     <div className={styles.home}>
       {vinyls.map((vinyl: Vinyl) => (

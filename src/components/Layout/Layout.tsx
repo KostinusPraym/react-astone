@@ -5,20 +5,18 @@ import Header from "../Header/Header";
 
 type Props = {
   isLoading: boolean;
-}
+};
 
 const Layout: React.FC<Props> = ({ isLoading }) => {
+  if (!isLoading) {
+    return null;
+  }
+
   return (
-    <div>
-      {isLoading ? (
-        <>
-          <Header />
-          <Outlet />
-        </>
-      ) : (
-        <img className="loader" src="/images/eclipse.gif" alt="loader" />
-      )}
-    </div>
+    <>
+      <Header />
+      <Outlet />
+    </>
   );
 };
 

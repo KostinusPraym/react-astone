@@ -5,9 +5,7 @@ import { Vinyl } from "../../pages/Home/Home";
 
 import s from "./Card.module.scss";
 
-type Props = Vinyl;
-
-const Card: React.FC<Props> = (vinyl) => {
+const Card: React.FC<Vinyl> = (vinyl) => {
   const genre = vinyl.genre.join(", ");
   return (
     <Link to={`card/${vinyl.id}`} className={s.card}>

@@ -6,8 +6,12 @@ import s from "./SingleCard.module.scss";
 
 const SingleCard = () => {
   const { id } = useParams();
-  const { data: vinyls } = useGetVinylsByIdQuery(String(id));
+  const { data: vinyls, isLoading } = useGetVinylsByIdQuery(String(id));
   const getGenre = () => (!vinyls ? "" : vinyls.genre.join(", "));
+
+  if (isLoading) {
+    return <img className="loader" src="/images/eclipse.gif" alt="loader" />;
+  }
 
   if (!vinyls) {
     return null;
