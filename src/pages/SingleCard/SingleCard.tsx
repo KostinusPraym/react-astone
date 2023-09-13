@@ -1,39 +1,29 @@
-import React from "react";
 import { useParams } from "react-router";
 
-import { useAppDispatch } from "../../hooks/redux-hooks";
-import { fetchDataById } from "../../redux/actions/fetchActions";
-import { Item } from "../Home/Home";
+import { useGetVinylsByIdQuery } from "../../redux/vinylsApi";
 
 import s from "./SingleCard.module.scss";
 
 const SingleCard = () => {
-  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const [item, setItem] = React.useState<Item>();
-  const getGenre = () => (!item ? "" : item.genre.join(", "));
+  const { data: vinyls } = useGetVinylsByIdQuery(String(id));
+  const getGenre = () => (!vinyls ? "" : vinyls.genre.join(", "));
 
-  React.useEffect(() => {
-    (async function () {
-      try {
-        if (id) {
-          const data = await dispatch(fetchDataById(id));
-          setItem(data.payload);
-        }
-      } catch (error) {}
-    })();
-  }, [id]);
-
-  if (!item) {
+  if (!vinyls) {
     return null;
   }
 
   return (
     <div className={s.singleCard}>
-      <h1 className={s.title}>{item.author}</h1>
+      <h1 className={s.title}>{vinyls.author}</h1>
       <div className={s.optionsGroup}>
         <div className={s.imageGroup}>
-          <img width={500} height={500} src={item.coverImage} alt={s.author} />
+          <img
+            width={500}
+            height={500}
+            src={vinyls.coverImage}
+            alt={s.author}
+          />
           <button onClick={() => {}} className={s.favorite}>
             Добавить в избранное
           </button>
@@ -45,15 +35,15 @@ const SingleCard = () => {
           </div>
           <div>
             <p>Издание:</p>
-            <p>{item.edition}</p>
+            <p>{vinyls.edition}</p>
           </div>
           <div>
             <p>Цена:</p>
-            <p>{item.price}$</p>
+            <p>{vinyls.price}$</p>
           </div>
           <div>
             <p>Тип записи:</p>
-            <p>{item.mediaType}</p>
+            <p>{vinyls.mediaType}</p>
           </div>
         </div>
       </div>

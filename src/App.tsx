@@ -9,17 +9,18 @@ import Register from "./pages/Register/Register";
 import { setUser } from "./redux/slices/authSlice";
 import { useAppDispatch } from "./hooks/redux-hooks";
 import Layout from "./components/Layout/Layout";
-import { getUserAction } from "./redux/actions/authActions";
+import { getUser } from "./redux/actions/authActions";
 import SingleCard from "./pages/SingleCard/SingleCard";
 
 function App() {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = React.useState(false);
 
+  //TODO
   React.useEffect(() => {
     (async function () {
       try {
-        const user = await dispatch(getUserAction());
+        const user = await dispatch(getUser());
         dispatch(setUser(user.payload));
         setIsLoading(true);
       } catch (error) {

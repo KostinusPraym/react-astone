@@ -23,8 +23,9 @@ const LinkGroup: React.FC<Props> = ({ email }) => {
   return (
     <div>
       <span>{email}</span>
-      <button>Favorites</button>
-      <button>History</button>
+      {/* TODO */}
+      <button className={s.out}>Favorites</button>
+      <button className={s.out}>History</button>
       <button className={s.out} onClick={handleOut}>
         Out
       </button>

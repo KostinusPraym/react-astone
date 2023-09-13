@@ -50,7 +50,7 @@ export const loginAction = createAsyncThunk(
   }
 );
 
-export const getUserAction = createAsyncThunk(
+export const getUser = createAsyncThunk(
   "auth/getUser",
   async (_, { rejectWithValue }) => {
     try {

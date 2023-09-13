@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import authSlice from "./slices/authSlice";
-import itemsSlice from "./slices/itemsSlice";
+import { vinylsApi } from "./vinylsApi";
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
-    items: itemsSlice,
+    [vinylsApi.reducerPath]: vinylsApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(vinylsApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
