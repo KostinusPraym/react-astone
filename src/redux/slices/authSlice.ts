@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ref, set } from "firebase/database";
 
-import { db } from "../../firebase.config";
+import { logoutAction } from "../actions/authActions";
 
 const initialState = {
+  status: "LOADING",
   email: null,
 };
 
@@ -12,18 +12,16 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, actions) {
-      state.email = actions.payload.email;
+      state.email = actions.payload;
+      state.status = "SUCCESS";
     },
-
-    removeUser(state) {
+  },
+  extraReducers: (builder) => {
+    builder.addCase(logoutAction.fulfilled, (state) => {
       state.email = null;
-    },
-
-    saveUser(_, actions) {
-      set(ref(db, "user"), { email: actions.payload });
-    },
+    });
   },
 });
 
-export const { setUser, removeUser, saveUser } = authSlice.actions;
+export const { setUser } = authSlice.actions;
 export default authSlice.reducer;

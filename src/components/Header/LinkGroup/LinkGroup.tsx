@@ -1,8 +1,7 @@
 import React from "react";
-import { getDatabase, ref, set } from "firebase/database";
 
 import { useAppDispatch } from "../../../hooks/redux-hooks";
-import { removeUser } from "../../../redux/slices/authSlice";
+import { logoutAction } from "../../../redux/actions/authActions";
 
 import s from "./LinkGroup.module.scss";
 
@@ -12,13 +11,6 @@ type Props = {
 
 const LinkGroup: React.FC<Props> = ({ email }) => {
   const dispatch = useAppDispatch();
-  const db = getDatabase();
-
-  //TODO
-  const handleOut = () => {
-    dispatch(removeUser());
-    set(ref(db, "user"), null);
-  };
 
   return (
     <div>
@@ -26,7 +18,7 @@ const LinkGroup: React.FC<Props> = ({ email }) => {
       {/* TODO */}
       <button className={s.out}>Favorites</button>
       <button className={s.out}>History</button>
-      <button className={s.out} onClick={handleOut}>
+      <button className={s.out} onClick={() => dispatch(logoutAction())}>
         Out
       </button>
     </div>

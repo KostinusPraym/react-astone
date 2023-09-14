@@ -5,9 +5,8 @@ import { toast } from "react-hot-toast";
 import Form from "../../components/Form/Form";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 import { registrationAction } from "../../redux/actions/authActions";
-import { saveUser, setUser } from "../../redux/slices/authSlice";
 
-import styles from "./Register.module.scss";
+import s from "./Register.module.scss";
 
 const Register = () => {
   const dispatch = useAppDispatch();
@@ -16,10 +15,7 @@ const Register = () => {
   const handleRegister = async (email: string, password: string) => {
     try {
       const user = await dispatch(registrationAction({ email, password }));
-
       if (user.type === "auth/registration/fulfilled") {
-        dispatch(saveUser(email));
-        dispatch(setUser({ email }));
         navigate("/");
       }
     } catch (error) {
@@ -29,16 +25,16 @@ const Register = () => {
   };
 
   return (
-    <div className={styles.register}>
-      <div className={styles.wrapper}>
-        <div className={styles.headerGroup}>
+    <div className={s.register}>
+      <div className={s.wrapper}>
+        <div className={s.headerGroup}>
           <h1>Sign Up:</h1>
           <Link to="/">
-            <img className={styles.close} src="/images/close.svg" alt="close" />
+            <img className={s.close} src="/images/close.svg" alt="close" />
           </Link>
         </div>
         <Form handleClick={handleRegister} />
-        <Link className={styles.registerLink} to="/login">
+        <Link className={s.registerLink} to="/login">
           or login
         </Link>
       </div>

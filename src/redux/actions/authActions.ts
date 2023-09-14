@@ -1,13 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { child, get } from "firebase/database";
-
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
-import { auth, dbRef } from "../../firebase.config";
+import { auth } from "../../firebase.config";
+import { setUser } from "../slices/authSlice";
 
 type RegistrationForm = {
   email: string;
@@ -50,16 +51,16 @@ export const loginAction = createAsyncThunk(
   }
 );
 
-export const getUser = createAsyncThunk(
-  "auth/getUser",
-  async (_, { rejectWithValue }) => {
+export const checkAuth = createAsyncThunk(
+  "auth/checkAuth",
+  async (_, { rejectWithValue, dispatch }) => {
     try {
-      const snapshot = await get(child(dbRef, "user"));
-      if (snapshot.exists()) {
-        return snapshot.val();
-      } else {
-        return { email: null };
-      }
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const email = user.email;
+          dispatch(setUser(email));
+        }
+      });
     } catch (error) {
       toast.error("Error Login");
       return rejectWithValue(error);
@@ -67,3 +68,14 @@ export const getUser = createAsyncThunk(
   }
 );
 
+export const logoutAction = createAsyncThunk(
+  "auth/deleteUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      signOut(auth);
+    } catch (error) {
+      toast.error("Error Login");
+      return rejectWithValue(error);
+    }
+  }
+);
