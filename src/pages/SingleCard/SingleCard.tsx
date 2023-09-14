@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 
 import { useGetVinylsByIdQuery } from "../../redux/vinylsApi";
+import Preloader from "../../components/Preloader/Preloader";
 
 import s from "./SingleCard.module.scss";
 
@@ -10,7 +11,7 @@ const SingleCard = () => {
   const getGenre = () => (!vinyls ? "" : vinyls.genre.join(", "));
 
   if (isLoading) {
-    return <img className="loader" src="/images/eclipse.gif" alt="loader" />;
+    return <Preloader />;
   }
 
   if (!vinyls) {

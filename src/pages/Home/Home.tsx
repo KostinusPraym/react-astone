@@ -3,6 +3,7 @@ import React from "react";
 import Card from "../../components/Card/Card";
 
 import { useGetVinylsQuery } from "../../redux/vinylsApi";
+import Preloader from "../../components/Preloader/Preloader";
 
 import styles from "./Home.module.scss";
 
@@ -20,8 +21,9 @@ const Home = () => {
   const { data: vinyls = [], isLoading } = useGetVinylsQuery();
 
   if (isLoading) {
-    return <img className="loader" src="/images/eclipse.gif" alt="loader" />;
+    return <Preloader />;
   }
+  
   return (
     <div className={styles.home}>
       {vinyls.map((vinyl: Vinyl) => (
