@@ -59,6 +59,8 @@ export const checkAuth = createAsyncThunk(
         if (user) {
           const email = user.email;
           dispatch(setUser(email));
+        } else {
+          dispatch(setUser(null));
         }
       });
     } catch (error) {
