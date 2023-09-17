@@ -5,6 +5,7 @@ import { useAppSelector } from "../../hooks/redux-hooks";
 
 import Header from "../Header/Header";
 import Preloader from "../Preloader/Preloader";
+import SearchPanel from "../SearchPanel/SearchPanel";
 
 const Layout = () => {
   const { status } = useAppSelector((state) => state.auth);
@@ -16,6 +17,7 @@ const Layout = () => {
   return (
     <>
       <Header />
+      <SearchPanel />
       <Outlet />
     </>
   );

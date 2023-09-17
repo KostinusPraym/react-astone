@@ -5,7 +5,7 @@ import Card from "../../components/Card/Card";
 import { useGetVinylsQuery } from "../../redux/vinylsApi";
 import Preloader from "../../components/Preloader/Preloader";
 
-import styles from "./Home.module.scss";
+
 
 export type Vinyl = {
   id: string;
@@ -18,15 +18,15 @@ export type Vinyl = {
 };
 
 const Home = () => {
-  const { data: vinyls = [], isLoading } = useGetVinylsQuery();
+  const { data: vinyls = [], isLoading } = useGetVinylsQuery({search: ""});
 
   if (isLoading) {
     return <Preloader />;
   }
-  
+
   return (
-    <div className={styles.home}>
-      {vinyls.map((vinyl: Vinyl) => (
+    <div className="container">
+      {vinyls.map((vinyl) => (
         <Card key={vinyl.id} {...vinyl} />
       ))}
     </div>
