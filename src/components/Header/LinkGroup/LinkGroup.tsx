@@ -9,7 +9,7 @@ type Props = {
   email: string | null;
 };
 
-const LinkGroup: React.FC<Props> = ({ email }) => {
+const LinkGroup = ({ email }: Props) => {
   const dispatch = useAppDispatch();
 
   return (

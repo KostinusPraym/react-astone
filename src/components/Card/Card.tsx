@@ -5,10 +5,14 @@ import { Vinyl } from "../../pages/Home/Home";
 
 import s from "./Card.module.scss";
 
-const Card: React.FC<Vinyl> = (vinyl) => {
+type Props = {
+  vinyl: Vinyl;
+};
+
+const Card = ({ vinyl }: Props) => {
   const genre = vinyl.genre.join(", ");
   return (
-    <Link to={`card/${vinyl.id}`} className={s.card}>
+    <Link to={`/card/${vinyl.id}`} className={s.card}>
       <img width={300} height={250} src={vinyl.coverImage} alt="vinyl cover" />
       <h2 className={s.author}>{vinyl.author}</h2>
       <p className={s.price}>{vinyl.price}$</p>

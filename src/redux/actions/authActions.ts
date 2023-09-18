@@ -64,12 +64,14 @@ export const checkAuth = createAsyncThunk(
         }
       });
     } catch (error) {
+      //TODO
       toast.error("Error Login");
       return rejectWithValue(error);
     }
   }
 );
 
+//TODO
 export const logoutAction = createAsyncThunk(
   "auth/deleteUser",
   async (_, { rejectWithValue }) => {

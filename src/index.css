@@ -9,6 +9,7 @@ body {
 .app {
   background-color: #fff;
   padding: 0 20px;
+  min-height: 100vh;
 }
 
 .login,
@@ -17,7 +18,15 @@ body {
 }
 
 .loader {
-  position: absolute;
-  top: calc(50% - 107px);
-  left: calc(50% - 107px);
+  position: fixed;
+  top: calc(50% - 240px);
+  left: calc(50% - 240px);
+}
+
+.container {
+  margin: 0 auto;
+  display: grid;
+  max-width: 960px;
+  gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
 }

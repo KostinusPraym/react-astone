@@ -7,13 +7,13 @@ import NotFoundBySearch from "../../components/NotFoundBySearch/NotFoundBySearch
 
 const Search = () => {
   const [searchParams] = useSearchParams();
-  const searchQp = searchParams.get("search");
+  const searchQueryParam = searchParams.get("search");
   const {
     data: vinyls = [],
     isLoading,
     isFetching,
   } = useGetVinylsQuery({
-    search: searchQp,
+    search: searchQueryParam,
   });
 
   if (isLoading || isFetching) {
@@ -23,9 +23,9 @@ const Search = () => {
   return (
     <div>
       {vinyls.length ? (
-        <FoundBySearch searchQp={searchQp} vinyls={vinyls} />
+        <FoundBySearch searchQueryParam={searchQueryParam} vinyls={vinyls} />
       ) : (
-        <NotFoundBySearch searchQp={searchQp} />
+        <NotFoundBySearch searchQueryParam={searchQueryParam} />
       )}
     </div>
   );

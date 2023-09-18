@@ -8,16 +8,8 @@ import Routes from "./routes/Routes";
 function App() {
   const dispatch = useAppDispatch();
 
-  //TODO
   React.useEffect(() => {
-    (async function () {
-      try {
-        dispatch(checkAuth());
-      } catch (error) {
-        const typedError = error as Error;
-        toast.error(typedError.message);
-      }
-    })();
+    dispatch(checkAuth());
   }, [dispatch]);
 
   return (

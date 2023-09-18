@@ -5,8 +5,7 @@ import Card from "../../components/Card/Card";
 import { useGetVinylsQuery } from "../../redux/vinylsApi";
 import Preloader from "../../components/Preloader/Preloader";
 
-
-
+// Todo не используется сдесь
 export type Vinyl = {
   id: string;
   author: string;
@@ -18,7 +17,7 @@ export type Vinyl = {
 };
 
 const Home = () => {
-  const { data: vinyls = [], isLoading } = useGetVinylsQuery({search: ""});
+  const { data: vinyls = [], isLoading } = useGetVinylsQuery({ search: "" });
 
   if (isLoading) {
     return <Preloader />;
@@ -27,7 +26,7 @@ const Home = () => {
   return (
     <div className="container">
       {vinyls.map((vinyl) => (
-        <Card key={vinyl.id} {...vinyl} />
+        <Card key={vinyl.id} vinyl={vinyl} />
       ))}
     </div>
   );

@@ -6,7 +6,7 @@ type Props = {
   handleClick: (email: string, password: string) => void;
 };
 
-const Form: React.FC<Props> = ({ handleClick }) => {
+const Form = ({ handleClick }: Props) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
