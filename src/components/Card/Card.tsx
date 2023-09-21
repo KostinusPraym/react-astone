@@ -24,18 +24,18 @@ const Card = ({ vinyl }: Props) => {
   const [removeFavorites] = useRemoveFromFavoritesMutation();
   const { uid } = useAppSelector((state) => state.auth);
   const genre = vinyl.genre.join(", ");
-  const { data: isFavorite, isLoading } = useGetFavoritesByIdQuery({
+  const { data: favoriteVinyl, isLoading } = useGetFavoritesByIdQuery({
     id: vinyl.id,
     uid,
   });
-  
-  const handleAddFavorites = async (e: React.MouseEvent) => {
+
+  const changeStatusFavorites = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!uid) {
       navigate("/login");
       return;
     }
-    if (isFavorite) {
+    if (favoriteVinyl) {
       await removeFavorites({ id: vinyl.id, uid });
     } else {
       await addFavorites({ vinyl, uid });
@@ -52,9 +52,9 @@ const Card = ({ vinyl }: Props) => {
           <p className={s.genre}>{genre}</p>
         </div>
         <FavoriteIcons
-          isFavorite={isFavorite}
+          favoriteVinyl={favoriteVinyl}
           isLoading={isLoading}
-          handleAddFavorites={handleAddFavorites}
+          changeStatusFavorites={changeStatusFavorites}
         />
       </div>
     </Link>

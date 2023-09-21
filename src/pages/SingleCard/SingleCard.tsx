@@ -14,22 +14,19 @@ import FavoriteIcons from "../../components/Card/FavoriteIcons/FavoriteIcons";
 import s from "./SingleCard.module.scss";
 
 const SingleCard = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const { uid } = useAppSelector((state) => state.auth);
+
   const [addFavorites] = useAddInFavoritesMutation();
   const [removeFavorites] = useRemoveFromFavoritesMutation();
-  const { uid } = useAppSelector((state) => state.auth);
-  const { id } = useParams();
-  const {
-    data: vinyl,
-    isLoading,
-    isFetching,
-  } = useGetVinylsByIdQuery(String(id));
-  const { data: isFavorite, isLoading: isLoadingFavorites } =
-    useGetFavoritesByIdQuery(vinyl ? { id: vinyl.id, uid } : {});
+  const getGenre = () => vinyl && vinyl.genre.join(", ");
 
-  const getGenre = () => (!vinyl ? "" : vinyl.genre.join(", "));
+  const { data: vinyl, isLoading } = useGetVinylsByIdQuery(String(id));
+  const { data: favoriteVinyl, isLoading: isLoadingFavorites } =
+    useGetFavoritesByIdQuery({ id: String(id), uid });
 
-  const handleAddFavorites = async (e: React.MouseEvent) => {
+  const changeStatusFavorites = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!uid) {
       navigate("/login");
@@ -38,63 +35,49 @@ const SingleCard = () => {
     if (!vinyl) {
       return;
     }
-    if (isFavorite) {
+    if (favoriteVinyl) {
       await removeFavorites({ id: vinyl.id, uid });
     } else {
       await addFavorites({ vinyl, uid });
     }
   };
 
-  if (isLoading || isFetching) {
+  if (isLoading || !vinyl) {
     return <Preloader />;
   }
 
   return (
-    <>
-      {vinyl && (
-        <div className={s.singleCard}>
-          <div className={s.headerGroup}>
-            <h1 className={s.title}>{vinyl.author}</h1>
-            <FavoriteIcons
-              isFavorite={isFavorite}
-              isLoading={isLoadingFavorites}
-              handleAddFavorites={handleAddFavorites}
-            />
+    <div className={s.singleCard}>
+      <div className={s.headerGroup}>
+        <h1 className={s.title}>{vinyl.author}</h1>
+        <FavoriteIcons
+          favoriteVinyl={favoriteVinyl}
+          isLoading={isLoadingFavorites}
+          changeStatusFavorites={changeStatusFavorites}
+        />
+      </div>
+      <div className={s.optionsGroup}>
+        <img width={500} height={500} src={vinyl.coverImage} alt={s.author} />
+        <div className={s.options}>
+          <div>
+            <p>Жанр:</p>
+            <p>{getGenre()}</p>
           </div>
-          <div className={s.optionsGroup}>
-            <div className={s.imageGroup}>
-              <img
-                width={500}
-                height={500}
-                src={vinyl.coverImage}
-                alt={s.author}
-              />
-              <button onClick={() => {}} className={s.favorite}>
-                Добавить в избранное
-              </button>
-            </div>
-            <div className={s.options}>
-              <div>
-                <p>Жанр:</p>
-                <p>{getGenre()}</p>
-              </div>
-              <div>
-                <p>Издание:</p>
-                <p>{vinyl.edition}</p>
-              </div>
-              <div>
-                <p>Цена:</p>
-                <p>{vinyl.price}$</p>
-              </div>
-              <div>
-                <p>Тип записи:</p>
-                <p>{vinyl.mediaType}</p>
-              </div>
-            </div>
+          <div>
+            <p>Издание:</p>
+            <p>{vinyl.edition}</p>
+          </div>
+          <div>
+            <p>Цена:</p>
+            <p>{vinyl.price}$</p>
+          </div>
+          <div>
+            <p>Тип записи:</p>
+            <p>{vinyl.mediaType}</p>
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 

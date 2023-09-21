@@ -5,8 +5,8 @@ import { Vinyl } from "../pages/Home/Home";
 const BASE_URL = "https://react-astone-default-rtdb.firebaseio.com/";
 
 interface QueryParams {
-  id?: string;
-  uid?: string;
+  id: string;
+  uid: string;
 }
 
 export interface ResponseParams {
