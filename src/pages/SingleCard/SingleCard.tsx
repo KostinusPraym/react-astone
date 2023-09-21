@@ -10,6 +10,7 @@ import {
 } from "../../redux/favoritesApi";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import FavoriteIcons from "../../components/Card/FavoriteIcons/FavoriteIcons";
+import SearchPanel from "../../components/SearchPanel/SearchPanel";
 
 import s from "./SingleCard.module.scss";
 
@@ -47,37 +48,40 @@ const SingleCard = () => {
   }
 
   return (
-    <div className={s.singleCard}>
-      <div className={s.headerGroup}>
-        <h1 className={s.title}>{vinyl.author}</h1>
-        <FavoriteIcons
-          favoriteVinyl={favoriteVinyl}
-          isLoading={isLoadingFavorites}
-          changeStatusFavorites={changeStatusFavorites}
-        />
-      </div>
-      <div className={s.optionsGroup}>
-        <img width={500} height={500} src={vinyl.coverImage} alt={s.author} />
-        <div className={s.options}>
-          <div>
-            <p>Жанр:</p>
-            <p>{getGenre()}</p>
-          </div>
-          <div>
-            <p>Издание:</p>
-            <p>{vinyl.edition}</p>
-          </div>
-          <div>
-            <p>Цена:</p>
-            <p>{vinyl.price}$</p>
-          </div>
-          <div>
-            <p>Тип записи:</p>
-            <p>{vinyl.mediaType}</p>
+    <>
+      <SearchPanel />
+      <div className={s.singleCard}>
+        <div className={s.headerGroup}>
+          <h1 className={s.title}>{vinyl.author}</h1>
+          <FavoriteIcons
+            favoriteVinyl={favoriteVinyl}
+            isLoading={isLoadingFavorites}
+            changeStatusFavorites={changeStatusFavorites}
+          />
+        </div>
+        <div className={s.optionsGroup}>
+          <img width={500} height={500} src={vinyl.coverImage} alt={s.author} />
+          <div className={s.options}>
+            <div>
+              <p>Жанр:</p>
+              <p>{getGenre()}</p>
+            </div>
+            <div>
+              <p>Издание:</p>
+              <p>{vinyl.edition}</p>
+            </div>
+            <div>
+              <p>Цена:</p>
+              <p>{vinyl.price}$</p>
+            </div>
+            <div>
+              <p>Тип записи:</p>
+              <p>{vinyl.mediaType}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

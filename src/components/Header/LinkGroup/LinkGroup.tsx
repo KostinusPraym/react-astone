@@ -1,4 +1,5 @@
-import React from "react";
+
+import { Link } from "react-router-dom";
 
 import { useAppDispatch } from "../../../hooks/redux-hooks";
 import { logoutAction } from "../../../redux/actions/authActions";
@@ -13,14 +14,23 @@ const LinkGroup = ({ email }: Props) => {
   const dispatch = useAppDispatch();
 
   return (
-    <div>
-      <span>{email}</span>
-      {/* TODO */}
-      <button className={s.out}>Favorites</button>
-      <button className={s.out}>History</button>
-      <button className={s.out} onClick={() => dispatch(logoutAction())}>
-        Out
-      </button>
+    <div className={s.links}>
+      <div className={s.linkGroup}>
+        <Link to="/favorites" className={s.favorite}>
+          Favorites
+        </Link>
+        <Link to="/" className={s.out}>
+          History
+        </Link>
+        <button className={s.out} onClick={() => dispatch(logoutAction())}>
+          Out
+        </button>
+      </div>
+      {email && (
+        <div className={s.avatar}>
+          <p className={s.emailValue}>{email.slice(0, 1)}</p>
+        </div>
+      )}
     </div>
   );
 };

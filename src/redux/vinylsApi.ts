@@ -30,7 +30,7 @@ export const vinylsApi = createApi({
       }),
     }),
     getSearchSuggest: build.query<Vinyl[], QueryParams>({
-      query: ({ search = "", limit = 5, page = 1 }) => {
+      query: ({ search = "", limit = 0, page = 1 }) => {
         return {
           url: "records",
           params: { search, limit, page },

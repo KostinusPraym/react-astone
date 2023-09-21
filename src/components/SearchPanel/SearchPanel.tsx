@@ -16,7 +16,7 @@ const Search = () => {
   const debouncedSearch = useDebounce(searchValue, 500);
   const { data: vinyls } = useGetSearchSuggestQuery({
     search: debouncedSearch,
-    limit: 5,
+    limit: debouncedSearch ? 5 : 0,
   });
 
   const handleSubmit = (e: React.FormEvent) => {

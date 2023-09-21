@@ -1,5 +1,5 @@
 import React from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 import { useAppDispatch } from "./hooks/redux-hooks";
 import { checkAuth } from "./redux/actions/authActions";

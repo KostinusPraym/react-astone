@@ -2,21 +2,48 @@
   width: 300px;
   height: 350px;
 
-  img {
-    margin-bottom: 9px;
+  &:hover {
+    background-color: rgba(61, 61, 61, 0.11);
+    transform: scale(1.01);
   }
 
-  .author {
-    font-size: 18px;
-    margin-bottom: 7px;
-  }
-  .price {
-    font-weight: 700; 
-    font-size: 18px;
-    margin-bottom: 9px;
-  }
-  .genre {
-    font-size: 14px;
-    color: rgb(83, 83, 83);
+  .optionsWrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .options {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+
+      img {
+        margin-bottom: 9px;
+      }
+
+      .author {
+        font-size: 18px;
+        margin-bottom: 7px;
+      }
+      .price {
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 9px;
+      }
+      .genre {
+        font-size: 14px;
+        color: rgb(83, 83, 83);
+      }
+    }
+
+    .favorite {
+      div {
+        padding: 10px;
+        &:hover {
+          svg {
+            fill: rgb(246, 109, 109);
+          }
+        }
+      }
+    }
   }
 }

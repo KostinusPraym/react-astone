@@ -18,6 +18,8 @@ body {
 }
 
 .loader {
+  width: 480px;
+  height: 480px;
   position: fixed;
   top: calc(50% - 240px);
   left: calc(50% - 240px);
@@ -30,3 +32,5 @@ body {
   gap: 30px;
   grid-template-columns: repeat(3, 1fr);
 }
+
+

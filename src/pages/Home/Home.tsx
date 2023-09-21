@@ -4,6 +4,7 @@ import Card from "../../components/Card/Card";
 
 import { useGetVinylsQuery } from "../../redux/vinylsApi";
 import Preloader from "../../components/Preloader/Preloader";
+import SearchPanel from "../../components/SearchPanel/SearchPanel";
 
 // Todo не используется сдесь
 export type Vinyl = {
@@ -24,11 +25,14 @@ const Home = () => {
   }
 
   return (
-    <div className="container">
-      {vinyls.map((vinyl) => (
-        <Card key={vinyl.id} vinyl={vinyl} />
-      ))}
-    </div>
+    <>
+      <SearchPanel />
+      <div className="container">
+        {vinyls.map((vinyl) => (
+          <Card key={vinyl.id} vinyl={vinyl} />
+        ))}
+      </div>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import { logoutAction } from "../actions/authActions";
 const initialState = {
   status: "LOADING",
   email: null,
+  uid: "",
 };
 
 const authSlice = createSlice({
@@ -12,7 +13,13 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, actions) {
-      state.email = actions.payload;
+      state.email = actions.payload.email;
+      state.uid = actions.payload.uid;
+      state.status = "SUCCESS";
+    },
+    userNotFound(state) {
+      state.email = null;
+      state.uid = "";
       state.status = "SUCCESS";
     },
   },
@@ -23,5 +30,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser } = authSlice.actions;
+export const { setUser, userNotFound } = authSlice.actions;
 export default authSlice.reducer;

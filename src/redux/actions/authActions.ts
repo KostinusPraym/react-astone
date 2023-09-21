@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 
 import { auth } from "../../firebase.config";
-import { setUser } from "../slices/authSlice";
+import { setUser, userNotFound } from "../slices/authSlice";
 
 type RegistrationForm = {
   email: string;
@@ -57,10 +57,9 @@ export const checkAuth = createAsyncThunk(
     try {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          const email = user.email;
-          dispatch(setUser(email));
+          dispatch(setUser({ email: user.email, uid: user.uid }));
         } else {
-          dispatch(setUser(null));
+          dispatch(userNotFound());
         }
       });
     } catch (error) {

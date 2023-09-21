@@ -1,0 +1,11 @@
+.favorite {
+  div {
+    cursor: pointer;
+    padding: 10px;
+    &:hover {
+      svg {
+        fill: rgb(246, 109, 109);
+      }
+    }
+  }
+}

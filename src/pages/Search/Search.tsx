@@ -4,6 +4,7 @@ import { useGetVinylsQuery } from "../../redux/vinylsApi";
 import Preloader from "../../components/Preloader/Preloader";
 import FoundBySearch from "../../components/FoundBySearch/FoundBySearch";
 import NotFoundBySearch from "../../components/NotFoundBySearch/NotFoundBySearch";
+import SearchPanel from "../../components/SearchPanel/SearchPanel";
 
 const Search = () => {
   const [searchParams] = useSearchParams();
@@ -22,6 +23,7 @@ const Search = () => {
 
   return (
     <div>
+      <SearchPanel />
       {vinyls.length ? (
         <FoundBySearch searchQueryParam={searchQueryParam} vinyls={vinyls} />
       ) : (
