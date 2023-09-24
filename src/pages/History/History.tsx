@@ -26,8 +26,8 @@ const History = () => {
       <h2>History</h2>
       {data && (
         <ul className={s.historyContainer}>
-          {Object.entries(data).map((resultList) => {
-            const [key, { search, searchUrl}] = resultList;
+          {Object.entries(data).map((searchResponse) => {
+            const [key, { search, searchUrl}] = searchResponse;
             return <HistoryItem key={key} search={search} uniqKey={key} searchUrl={searchUrl} />;
           })}
         </ul>
