@@ -1,5 +1,5 @@
 import { ResponseParams } from "../redux/rtkQuery/favoritesApi";
-import { Vinyl } from "../pages/Home/Home";
+import { Vinyl } from "../redux/rtkQuery/vinylsApi";
 
 type FavoriteItem = {
   [uniqueId: string]: Vinyl;

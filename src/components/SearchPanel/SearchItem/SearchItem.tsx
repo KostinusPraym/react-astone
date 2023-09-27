@@ -1,9 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
-import { Vinyl } from "../../../pages/Home/Home";
-
-import s from "./SearchItem.module.scss";
+import { Vinyl } from "../../../redux/rtkQuery/vinylsApi";
 
 type Props = {
   vinyl: Vinyl;

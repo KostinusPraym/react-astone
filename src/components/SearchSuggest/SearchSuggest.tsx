@@ -1,4 +1,4 @@
-import { Vinyl } from "../../pages/Home/Home";
+import { Vinyl } from "../../redux/rtkQuery/vinylsApi";
 import SearchItem from "../SearchPanel/SearchItem/SearchItem";
 
 type Props = {

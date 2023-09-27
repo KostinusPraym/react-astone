@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { Vinyl } from "../../pages/Home/Home";
+import { Vinyl } from "../../redux/rtkQuery/vinylsApi";
 import {
   useAddInFavoritesMutation,
   useGetFavoritesByIdQuery,

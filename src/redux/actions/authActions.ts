@@ -39,7 +39,6 @@ export const loginAction = createAsyncThunk(
   async ({ email, password }: RegistrationForm, { rejectWithValue }) => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-
       if (response.user) {
         toast.success("Success Login");
       }
@@ -52,19 +51,14 @@ export const loginAction = createAsyncThunk(
 
 export const checkAuth = createAsyncThunk(
   "auth/checkAuth",
-  (_, { rejectWithValue, dispatch }) => {
-    try {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          return dispatch(setUser({ email: user.email, uid: user.uid }));
-        } else {
-          return dispatch(userNotFound());
-        }
-      });
-    } catch (error) {
-      toast.error("Error Login");
-      return rejectWithValue(error);
-    }
+  (_, { dispatch }) => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        return dispatch(setUser({ email: user.email, uid: user.uid }));
+      } else {
+        return dispatch(userNotFound());
+      }
+    });
   },
 );
 

@@ -1,24 +1,11 @@
-import React from "react";
-
 import Card from "../../components/Card/Card";
-
-import { useGetVinylsQuery } from "../../redux/rtkQuery/vinylsApi";
-import Preloader from "../../components/Preloader/Preloader";
+import Preloader from "../../components/Preloaders/Preloader";
 import SearchPanel from "../../components/SearchPanel/SearchPanel";
 
-// Todo не используется сдесь
-export type Vinyl = {
-  id: string;
-  author: string;
-  price: string;
-  genre: string[];
-  mediaType: string;
-  edition: string;
-  coverImage: string;
-};
+import { useGetVinylsQuery } from "../../redux/rtkQuery/vinylsApi";
 
 const Home = () => {
-  const { data: vinyls = [], isLoading } = useGetVinylsQuery({ search: "" });
+  const { data: vinyls, isLoading } = useGetVinylsQuery({ search: "" });
 
   if (isLoading) {
     return <Preloader />;
@@ -26,12 +13,16 @@ const Home = () => {
 
   return (
     <>
-      <SearchPanel />
-      <div className="container">
-        {vinyls.map((vinyl) => (
-          <Card key={vinyl.id} vinyl={vinyl} />
-        ))}
-      </div>
+      {vinyls && (
+        <>
+          <SearchPanel />
+          <div className="container">
+            {vinyls.map((vinyl) => (
+              <Card key={vinyl.id} vinyl={vinyl} />
+            ))}
+          </div>
+        </>
+      )}
     </>
   );
 };

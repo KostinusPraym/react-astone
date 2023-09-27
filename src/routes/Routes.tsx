@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
-import Preloader from "../components/Preloader/Preloader";
+import Preloader from "../components/Preloaders/Preloader";
 import { useAuth } from "../hooks/use-auth";
 import { useAppSelector } from "../hooks/redux-hooks";
 
@@ -22,25 +22,25 @@ const Layout = lazy(() => import("../components/Layout/Layout"));
 
 type Props = {
   isAuth: boolean;
-  status: string;
+  statusAuth: string;
 };
 
-const PrivateRoute = ({ isAuth, status }: Props) => {
-  if (status !== "SUCCESS") {
+const PrivateRoute = ({ isAuth, statusAuth }: Props) => {
+  if (statusAuth !== "SUCCESS") {
     return <Preloader />;
   }
   return <> {isAuth ? <Outlet /> : <Navigate to="/login" />}</>;
 };
 
-const RedirectAfterSuccessAuth = ({ isAuth, status }: Props) => {
-  if (status !== "SUCCESS") {
+const RedirectAfterSuccessAuth = ({ isAuth, statusAuth }: Props) => {
+  if (statusAuth !== "SUCCESS") {
     return <Preloader />;
   }
   return <> {isAuth ? <Navigate to="/" /> : <Outlet />}</>;
 };
 
 const Public = () => {
-  const { status } = useAppSelector((state) => state.auth);
+  const { statusAuth } = useAppSelector((state) => state.auth);
   const { isAuth } = useAuth();
   return (
     <BrowserRouter>
@@ -50,14 +50,19 @@ const Public = () => {
             <Route index element={<Home />}></Route>
             <Route path="/search-page" element={<SearchPage />}></Route>
             <Route path="/card/:id" element={<SingleCard />}></Route>
-            <Route element={<PrivateRoute isAuth={isAuth} status={status} />}>
+            <Route
+              element={<PrivateRoute isAuth={isAuth} statusAuth={statusAuth} />}
+            >
               <Route path="/history" element={<History />}></Route>
               <Route path="/favorites" element={<Favorites />}></Route>
             </Route>
           </Route>
           <Route
             element={
-              <RedirectAfterSuccessAuth isAuth={isAuth} status={status} />
+              <RedirectAfterSuccessAuth
+                isAuth={isAuth}
+                statusAuth={statusAuth}
+              />
             }
           >
             <Route path="/register" element={<Register />}></Route>

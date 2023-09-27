@@ -1,12 +1,13 @@
 import React from "react";
 
-const handleShareToTelegram = () => {
-  const telegramUrl = `https://t.me/share/url?url=${window.location.href}`;
-  window.open(telegramUrl, "_blank");
-};
-
 const ShareButton = () => {
   const [activePanel, setActivePanel] = React.useState(false);
+
+  const handleShareToTelegram = () => {
+    const telegramUrl = `https://t.me/share/url?url=${window.location.href}`;
+    window.open(telegramUrl, "_blank");
+  };
+  
   return (
     <div className="flex gap-2">
       <img
@@ -17,7 +18,12 @@ const ShareButton = () => {
       />
       {activePanel && (
         <div>
-          <img className="cursor-pointer" onClick={handleShareToTelegram} src="/images/telegram.svg" alt="telegram-icon" />
+          <img
+            className="cursor-pointer"
+            onClick={handleShareToTelegram}
+            src="/images/telegram.svg"
+            alt="telegram-icon"
+          />
         </div>
       )}
     </div>

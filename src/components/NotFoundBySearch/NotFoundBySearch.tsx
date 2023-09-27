@@ -1,4 +1,6 @@
-const NotFoundBySearch = ({ searchQueryParam }: { searchQueryParam: string | null }) => {
+type Props = { searchQueryParam: string | null }
+
+const NotFoundBySearch = ({ searchQueryParam }: Props) => {
   return (
     <div style={{ fontSize: "20px" }}>
       По запросу

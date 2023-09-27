@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { Vinyl } from "../../pages/Home/Home";
 import { getVinylsForFavorite } from "../../utils/getVinylsForFavorite";
+
+import { Vinyl } from "./vinylsApi";
 
 const BASE_URL = "https://react-astone-default-rtdb.firebaseio.com/";
 
@@ -38,9 +39,7 @@ export const favoritesApi = createApi({
           url: `favorites/${uid}/${"0" + id}.json`,
         };
       },
-      providesTags: (_, __, { id }) => {
-        return [{ type: "Favorites", id }];
-      },
+      providesTags: (_, __, { id }) => [{ type: "Favorites", id }],
     }),
     addInFavorites: build.mutation({
       query: ({ vinyl, uid }) => {

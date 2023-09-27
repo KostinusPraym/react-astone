@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDebounce } from "../../hooks/use-debounce";
 import { useGetSearchSuggestQuery } from "../../redux/rtkQuery/vinylsApi";
 import SearchSuggest from "../SearchSuggest/SearchSuggest";
-import Preloader from "../Preloader/Preloader";
+import Preloader from "../Preloaders/Preloader";
 import { setSearchValue } from "../../redux/slices/searchSlice";
 import { useAddInHistoryMutation } from "../../redux/rtkQuery/historyApi";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 const Search = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const { uid } = useAppSelector((state) => state.auth);
   const { search: searchValue } = useAppSelector((state) => state.search);
   const [isShowSuggest, setShowSuggest] = React.useState(false);
@@ -25,6 +26,10 @@ const Search = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!debouncedSearch) {
+      return;
+    }
     if (vinyls) {
       const queryString = qs.stringify({
         search: debouncedSearch,
@@ -50,16 +55,16 @@ const Search = () => {
     <form onSubmit={handleSubmit} className="relative mb-[30px] text-right">
       <div>
         <img
-          className="h-[28px] w-[28px] absolute top-[8px] right-[8px]"
+          className="absolute right-[8px] top-[8px] h-[28px] w-[28px]"
           src="/images/search.svg"
           alt="search"
         />
         <input
-          onChange={(e) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             dispatch(setSearchValue({ searchValue: e.target.value }))
           }
           value={searchValue}
-          className="border border-solid px-[30px] py-[10px] w-[250px]"
+          className="w-[250px] border border-solid px-[30px] py-[10px]"
           type="text"
           placeholder="Search"
           onFocus={() => setShowSuggest(true)}

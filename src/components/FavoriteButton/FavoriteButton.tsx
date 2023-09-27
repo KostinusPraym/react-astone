@@ -1,8 +1,7 @@
 import { ResponseParams } from "../../redux/rtkQuery/favoritesApi";
-import PreloaderFavorite from "../Preloader/PreloaderFavorite";
+import PreloaderFavorite from "../Preloaders/PreloaderFavorite";
 
 import { ReactComponent as FavoritesImg } from "./favorite.svg";
-
 
 type Props = {
   favoriteVinyl: ResponseParams | undefined | null;

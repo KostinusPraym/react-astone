@@ -1,8 +1,8 @@
+import HistoryItem from "../../components/HistoryItem/HistoryItem";
+import Preloader from "../../components/Preloaders/Preloader";
+
 import { useGetHistoryQuery } from "../../redux/rtkQuery/historyApi";
 import { useAppSelector } from "../../hooks/redux-hooks";
-
-import HistoryItem from "../../components/HistoryItem/HistoryItem";
-import Preloader from "../../components/Preloader/Preloader";
 
 const History = () => {
   const { uid } = useAppSelector((state) => state.auth);

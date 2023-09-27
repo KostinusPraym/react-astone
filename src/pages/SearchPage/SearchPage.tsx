@@ -1,20 +1,22 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { useGetVinylsQuery } from "../../redux/rtkQuery/vinylsApi";
-import Preloader from "../../components/Preloader/Preloader";
+import Preloader from "../../components/Preloaders/Preloader";
 import FoundBySearch from "../../components/FoundBySearch/FoundBySearch";
 import NotFoundBySearch from "../../components/NotFoundBySearch/NotFoundBySearch";
 import SearchPanel from "../../components/SearchPanel/SearchPanel";
+
 import { setSearchValue } from "../../redux/slices/searchSlice";
+import { useGetVinylsQuery } from "../../redux/rtkQuery/vinylsApi";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 
 const SearchPage = () => {
   const dispatch = useAppDispatch();
+  
   const [searchParams] = useSearchParams();
   const searchQueryParam = searchParams.get("search");
   const {
-    data: vinyls = [],
+    data: vinyls,
     isLoading,
     isFetching,
   } = useGetVinylsQuery({
@@ -22,8 +24,11 @@ const SearchPage = () => {
   });
 
   React.useEffect(() => {
+    if (!searchQueryParam) {
+      return;
+    }
     dispatch(setSearchValue({ searchValue: searchQueryParam }));
-  }, []);
+  }, [dispatch]);
 
   if (isLoading || isFetching) {
     return <Preloader />;
@@ -31,11 +36,15 @@ const SearchPage = () => {
 
   return (
     <div>
-      <SearchPanel />
-      {vinyls.length ? (
-        <FoundBySearch searchQueryParam={searchQueryParam} vinyls={vinyls} />
-      ) : (
-        <NotFoundBySearch searchQueryParam={searchQueryParam} />
+      {vinyls && (
+        <>
+          <SearchPanel />
+          {vinyls.length ? (
+            <FoundBySearch searchQueryParam={searchQueryParam} vinyls={vinyls}/>
+          ) : (
+            <NotFoundBySearch searchQueryParam={searchQueryParam} />
+          )}
+        </>
       )}
     </div>
   );

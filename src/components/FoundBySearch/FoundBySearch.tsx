@@ -1,9 +1,9 @@
-import { Vinyl } from "../../pages/Home/Home";
+import { Vinyl } from "../../redux/rtkQuery/vinylsApi";
 import Card from "../Card/Card";
 
 type Props = {
-  vinyls: Vinyl[];
   searchQueryParam: string | null;
+  vinyls: Vinyl[];
 };
 
 const FoundBySearch = ({ searchQueryParam, vinyls }: Props) => {

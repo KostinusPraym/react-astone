@@ -1,7 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  status: "LOADING",
+interface authSliceState {
+  statusAuth: "LOADING" | "SUCCESS";
+  email: null | string;
+  uid: string;
+}
+
+const initialState: authSliceState = {
+  statusAuth: "LOADING",
   email: null,
   uid: "",
 };
@@ -10,18 +16,18 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser(state, actions) {
+    setUser(state, actions: PayloadAction<{ email: string | null; uid: string }>) {
       state.email = actions.payload.email;
       state.uid = actions.payload.uid;
-      state.status = "SUCCESS";
+      state.statusAuth = "SUCCESS";
     },
     userNotFound(state) {
       state.email = null;
       state.uid = "";
-      state.status = "SUCCESS";
+      state.statusAuth = "SUCCESS";
     },
   },
 });
 
-export const { setUser, userNotFound} = authSlice.actions;
+export const { setUser, userNotFound } = authSlice.actions;
 export default authSlice.reducer;

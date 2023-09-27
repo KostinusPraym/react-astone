@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import PropTypes, { func } from "prop-types";
+import PropTypes from "prop-types";
 
 type Props = {
   handleClick: (email: string, password: string) => void;
