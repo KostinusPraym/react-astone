@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const BASE_URL = "https://react-astone-default-rtdb.firebaseio.com/";
 
 type HistoryResponse = {
-  uniqueId: { search: "string"; searchUrl: string };
+  [uniqueId: string]: { search: "string"; searchUrl: string };
 };
 
 export const historyApi = createApi({

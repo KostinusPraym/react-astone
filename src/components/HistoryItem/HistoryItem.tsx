@@ -19,7 +19,7 @@ const HistoryItem = ({ search, uniqKey, searchUrl }: Props) => {
         className="h-8 w-8 cursor-pointer"
         src="/images/close-circle.svg"
         alt="search"
-        onClick={async () => await removeFromHistory({ uid, uniqKey })}
+        onClick={() => removeFromHistory({ uid, uniqKey })}
       />
     </li>
   );
