@@ -9,6 +9,7 @@ import { lazy, Suspense } from "react";
 
 import Preloader from "../components/Preloader/Preloader";
 import { useAuth } from "../hooks/use-auth";
+import { useAppSelector } from "../hooks/redux-hooks";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 const History = lazy(() => import("../pages/History/History"));
@@ -19,17 +20,28 @@ const Login = lazy(() => import("../pages/Login/Login"));
 const Favorites = lazy(() => import("../pages/Favorites/Favorites"));
 const Layout = lazy(() => import("../components/Layout/Layout"));
 
-const PrivateRoute = () => {
-  const { isAuth } = useAuth();
+type Props = {
+  isAuth: boolean;
+  status: string;
+};
+
+const PrivateRoute = ({ isAuth, status }: Props) => {
+  if (status !== "SUCCESS") {
+    return <Preloader />;
+  }
   return <> {isAuth ? <Outlet /> : <Navigate to="/login" />}</>;
 };
 
-const RedirectAfterSuccessAuth = () => {
-  const { isAuth } = useAuth();
+const RedirectAfterSuccessAuth = ({ isAuth, status }: Props) => {
+  if (status !== "SUCCESS") {
+    return <Preloader />;
+  }
   return <> {isAuth ? <Navigate to="/" /> : <Outlet />}</>;
 };
 
 const Public = () => {
+  const { status } = useAppSelector((state) => state.auth);
+  const { isAuth } = useAuth();
   return (
     <BrowserRouter>
       <Suspense fallback={<Preloader />}>
@@ -38,12 +50,16 @@ const Public = () => {
             <Route index element={<Home />}></Route>
             <Route path="/search-page" element={<SearchPage />}></Route>
             <Route path="/card/:id" element={<SingleCard />}></Route>
-            <Route element={<PrivateRoute />}>
+            <Route element={<PrivateRoute isAuth={isAuth} status={status} />}>
               <Route path="/history" element={<History />}></Route>
               <Route path="/favorites" element={<Favorites />}></Route>
             </Route>
           </Route>
-          <Route element={<RedirectAfterSuccessAuth />}>
+          <Route
+            element={
+              <RedirectAfterSuccessAuth isAuth={isAuth} status={status} />
+            }
+          >
             <Route path="/register" element={<Register />}></Route>
             <Route path="/login" element={<Login />}></Route>
           </Route>
