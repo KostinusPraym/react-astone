@@ -7,7 +7,7 @@ import { useAppSelector } from "../../hooks/redux-hooks";
 const Favorites = () => {
   const { uid } = useAppSelector((state) => state.auth);
   const { data = [], isFetching, isLoading } = useGetFavoritesQuery(uid);
-  console.log(data)
+  
   if (isFetching || isLoading) {
     return <Preloader />;
   }
