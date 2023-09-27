@@ -11,10 +11,13 @@
     "@types/node": "^16.18.48",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
+    "concurrently": "^8.2.1",
     "firebase": "^10.3.1",
+    "prop-types": "^15.8.1",
     "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-error-boundary": "^4.0.11",
     "react-hot-toast": "^2.4.1",
     "react-redux": "^8.1.2",
     "react-router": "^6.15.0",
@@ -25,10 +28,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run dev\" \"npm run server\"",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "node server/server.js"
   },
   "browserslist": {
     "production": [
@@ -44,8 +49,14 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
-    "eslint": "^8.48.0"
-  }
+    "eslint": "^8.48.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "tailwindcss": "^3.3.3"
+  },
+  "main": "tailwind.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
-
-
