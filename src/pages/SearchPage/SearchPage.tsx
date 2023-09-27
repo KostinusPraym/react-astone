@@ -28,7 +28,7 @@ const SearchPage = () => {
       return;
     }
     dispatch(setSearchValue({ searchValue: searchQueryParam }));
-  }, [dispatch]);
+  }, [dispatch, searchQueryParam]);
 
   if (isLoading || isFetching) {
     return <Preloader />;
