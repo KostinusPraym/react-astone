@@ -31,7 +31,7 @@ export const favoritesApi = createApi({
         };
       },
       providesTags: ["FavoritePage"],
-      transformResponse: (data: ResponseParams) => getVinylsForFavorite(data),
+      transformResponse: (data: ResponseParams | undefined) => getVinylsForFavorite(data),
     }),
     getFavoritesById: build.query<ResponseParams, QueryParams>({
       query: ({ id, uid }) => {
