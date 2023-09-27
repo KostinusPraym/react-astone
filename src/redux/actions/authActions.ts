@@ -22,9 +22,8 @@ export const registrationAction = createAsyncThunk(
       const response = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
-
       if (response.user) {
         toast.success("Success Registration");
       }
@@ -32,7 +31,7 @@ export const registrationAction = createAsyncThunk(
       toast.error("Error Registration");
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const loginAction = createAsyncThunk(
@@ -48,12 +47,12 @@ export const loginAction = createAsyncThunk(
       toast.error("Error Login");
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const checkAuth = createAsyncThunk(
   "auth/checkAuth",
-  async (_, { rejectWithValue, dispatch }) => {
+  (_, { rejectWithValue, dispatch }) => {
     try {
       onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -63,22 +62,10 @@ export const checkAuth = createAsyncThunk(
         }
       });
     } catch (error) {
-      //TODO
       toast.error("Error Login");
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
-//TODO
-export const logoutAction = createAsyncThunk(
-  "auth/deleteUser",
-  async (_, { rejectWithValue }) => {
-    try {
-      signOut(auth);
-    } catch (error) {
-      toast.error("Error Login");
-      return rejectWithValue(error);
-    }
-  }
-);
+export const logout = createAsyncThunk("auth/logOutUser", () => signOut(auth));

@@ -2,7 +2,7 @@ import React from "react";
 
 import Card from "../../components/Card/Card";
 
-import { useGetVinylsQuery } from "../../redux/vinylsApi";
+import { useGetVinylsQuery } from "../../redux/rtkQuery/vinylsApi";
 import Preloader from "../../components/Preloader/Preloader";
 import SearchPanel from "../../components/SearchPanel/SearchPanel";
 

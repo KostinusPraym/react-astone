@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { Vinyl } from "../pages/Home/Home";
+import { Vinyl } from "../../pages/Home/Home";
 
 const BASE_URL = "https://64fb0783cb9c00518f7a8b10.mockapi.io/";
 
@@ -17,7 +17,7 @@ export const vinylsApi = createApi({
   }),
   endpoints: (build) => ({
     getVinyls: build.query<Vinyl[], QueryParams>({
-      query: ({ search}) => {
+      query: ({ search }) => {
         return {
           url: "records",
           params: { search },

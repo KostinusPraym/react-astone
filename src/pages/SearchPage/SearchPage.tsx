@@ -1,12 +1,16 @@
+import React from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { useGetVinylsQuery } from "../../redux/vinylsApi";
+import { useGetVinylsQuery } from "../../redux/rtkQuery/vinylsApi";
 import Preloader from "../../components/Preloader/Preloader";
 import FoundBySearch from "../../components/FoundBySearch/FoundBySearch";
 import NotFoundBySearch from "../../components/NotFoundBySearch/NotFoundBySearch";
 import SearchPanel from "../../components/SearchPanel/SearchPanel";
+import { setSearchValue } from "../../redux/slices/searchSlice";
+import { useAppDispatch } from "../../hooks/redux-hooks";
 
-const Search = () => {
+const SearchPage = () => {
+  const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const searchQueryParam = searchParams.get("search");
   const {
@@ -16,6 +20,10 @@ const Search = () => {
   } = useGetVinylsQuery({
     search: searchQueryParam,
   });
+
+  React.useEffect(() => {
+    dispatch(setSearchValue({ searchValue: searchQueryParam }));
+  }, []);
 
   if (isLoading || isFetching) {
     return <Preloader />;
@@ -33,4 +41,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchPage;

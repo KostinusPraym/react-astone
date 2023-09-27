@@ -1,8 +1,6 @@
 import { Vinyl } from "../../pages/Home/Home";
 import Card from "../Card/Card";
 
-import s from "./FoundBySearch.module.scss";
-
 type Props = {
   vinyls: Vinyl[];
   searchQueryParam: string | null;
@@ -10,17 +8,17 @@ type Props = {
 
 const FoundBySearch = ({ searchQueryParam, vinyls }: Props) => {
   return (
-    <div className={s.foundBySearch}>
-      <div>
+    <>
+      <div className="text-xl mb-5">
         Найдено по запросу
-        <span> "{searchQueryParam}" </span>
+        <span className="font-bold"> "{searchQueryParam}" </span>
       </div>
       <div className="container">
         {vinyls.map((vinyl) => (
           <Card key={vinyl.id} vinyl={vinyl} />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

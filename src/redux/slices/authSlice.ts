@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { logoutAction } from "../actions/authActions";
-
 const initialState = {
   status: "LOADING",
   email: null,
@@ -23,12 +21,7 @@ const authSlice = createSlice({
       state.status = "SUCCESS";
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(logoutAction.fulfilled, (state) => {
-      state.email = null;
-    });
-  },
 });
 
-export const { setUser, userNotFound } = authSlice.actions;
+export const { setUser, userNotFound} = authSlice.actions;
 export default authSlice.reducer;

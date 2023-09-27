@@ -1,40 +1,30 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 import Form from "../../components/Form/Form";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 import { registrationAction } from "../../redux/actions/authActions";
 
-import s from "./Register.module.scss";
-
 const Register = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
-  const handleRegister = async (email: string, password: string) => {
-    try {
-      const user = await dispatch(registrationAction({ email, password }));
-      if (user.type === "auth/registration/fulfilled") {
-        navigate("/");
-      }
-    } catch (error) {
-      const typedError = error as Error;
-      toast.error(typedError.message);
-    }
+  const handleRegister = (email: string, password: string) => {
+    dispatch(registrationAction({ email, password }));
   };
 
   return (
-    <div className={s.register}>
-      <div className={s.wrapper}>
-        <div className={s.headerGroup}>
-          <h1>Sign Up:</h1>
+    <div className="flex h-screen w-full flex-col items-center justify-center gap-[0.6rem]">
+      <div className="relative border-2 border-solid px-[35px] py-[20px]">
+        <div className="flex items-center justify-center">
+          <h1 className="text-center text-xl">Sign Up:</h1>
           <Link to="/">
-            <img className={s.close} src="/images/close.svg" alt="close" />
+            <img
+              className="absolute right-[10px] top-[10px] h-[20px] w-[20px] cursor-pointer"
+              src="/images/close.svg"
+              alt="close"
+            />
           </Link>
         </div>
         <Form handleClick={handleRegister} />
-        <Link className={s.registerLink} to="/login">
+        <Link className="relative left-[275px] underline" to="/login">
           or login
         </Link>
       </div>

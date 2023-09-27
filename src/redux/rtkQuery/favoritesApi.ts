@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { Vinyl } from "../pages/Home/Home";
+import { Vinyl } from "../../pages/Home/Home";
+import { getVinylsForFavorite } from "../../utils/getVinylsForFavorite";
 
 const BASE_URL = "https://react-astone-default-rtdb.firebaseio.com/";
 
@@ -10,25 +11,26 @@ interface QueryParams {
 }
 
 export interface ResponseParams {
-  id: {
+  [id: string]: {
     [uniqueId: string]: Vinyl;
   };
 }
 
 export const favoritesApi = createApi({
   reducerPath: "favoritesApi",
-  tagTypes: ["Favorites"],
+  tagTypes: ["Favorites", "FavoritePage"],
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
   }),
   endpoints: (build) => ({
-    getFavorites: build.query<ResponseParams, string>({
+    getFavorites: build.query<Vinyl[], string>({
       query: (uid) => {
         return {
           url: `favorites/${uid}.json`,
         };
       },
-      providesTags: ["Favorites"],
+      providesTags: ["FavoritePage"],
+      transformResponse: (data: ResponseParams) => getVinylsForFavorite(data),
     }),
     getFavoritesById: build.query<ResponseParams, QueryParams>({
       query: ({ id, uid }) => {
@@ -36,7 +38,9 @@ export const favoritesApi = createApi({
           url: `favorites/${uid}/${"0" + id}.json`,
         };
       },
-      providesTags: ["Favorites"],
+      providesTags: (_, __, { id }) => {
+        return [{ type: "Favorites", id }];
+      },
     }),
     addInFavorites: build.mutation({
       query: ({ vinyl, uid }) => {
@@ -46,7 +50,9 @@ export const favoritesApi = createApi({
           body: vinyl,
         };
       },
-      invalidatesTags: ["Favorites"],
+      invalidatesTags: (_, __, { vinyl }: { vinyl: Vinyl }) => {
+        return [{ type: "Favorites", id: vinyl.id }, "FavoritePage"];
+      },
     }),
     removeFromFavorites: build.mutation({
       query: ({ id, uid }) => {
@@ -55,7 +61,9 @@ export const favoritesApi = createApi({
           method: "DELETE",
         };
       },
-      invalidatesTags: ["Favorites"],
+      invalidatesTags: (_, __, { id }: { id: string }) => {
+        return [{ type: "Favorites", id }, "FavoritePage"];
+      },
     }),
   }),
 });

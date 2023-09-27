@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
-
-import styles from "./Form.module.scss";
+import PropTypes, { func } from "prop-types";
 
 type Props = {
   handleClick: (email: string, password: string) => void;
 };
 
 const Form = ({ handleClick }: Props) => {
+  const input = useRef<HTMLInputElement>(null);
+
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const input = useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
     if (!input.current) {
@@ -19,10 +19,14 @@ const Form = ({ handleClick }: Props) => {
   }, []);
 
   return (
-    <form onSubmit={(e) => e.preventDefault()} className={styles.form}>
-      <div className={styles.inputGroup}>
+    <form
+      className="flex max-w-[25rem] flex-col gap-4 p-7"
+      onSubmit={(e) => e.preventDefault()}
+    >
+      <div className="flex items-center justify-between gap-[0.6rem]">
         <label htmlFor="email">Type e-mail</label>
         <input
+          className="max-w-[12rem] border-b border-solid bg-transparent"
           onChange={(e) => setEmail(e.target.value)}
           id="email"
           type="email"
@@ -30,9 +34,10 @@ const Form = ({ handleClick }: Props) => {
           ref={input}
         />
       </div>
-      <div className={styles.inputGroup}>
+      <div className="flex items-center justify-between gap-[0.6rem]">
         <label htmlFor="password">Type password</label>
         <input
+          className="max-w-[12rem] border-b border-solid bg-transparent"
           onChange={(e) => setPassword(e.target.value)}
           id="password"
           type="password"
@@ -41,13 +46,17 @@ const Form = ({ handleClick }: Props) => {
       </div>
 
       <button
-        className={styles.submit}
+        className="border border-solid p-1"
         onClick={() => handleClick(email, password)}
       >
         Submit
       </button>
     </form>
   );
+};
+
+Form.propTypes = {
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default Form;

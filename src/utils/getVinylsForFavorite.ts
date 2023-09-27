@@ -1,10 +1,11 @@
-import { ResponseParams } from "../redux/favoritesApi";
+import { ResponseParams } from "../redux/rtkQuery/favoritesApi";
 import { Vinyl } from "../pages/Home/Home";
 
-type FavoritesById = {
-  uniqueId: Vinyl;
+type FavoriteItem = {
+  [uniqueId: string]: Vinyl;
 };
 
+type FavoritesById = FavoriteItem[];
 /**
  * Спускаемся во вложенный объект чтобы получить результат
  * Example:
@@ -13,6 +14,6 @@ type FavoritesById = {
  * @returns Vinyl[]
  */
 export function getVinylsForFavorite(data: ResponseParams) {
-  const res: FavoritesById[] = Object.values(data);
+  const res: FavoritesById = Object.values(data);
   return res.map((vinyl) => Object.values(vinyl)[0]);
 }

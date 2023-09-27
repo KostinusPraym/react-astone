@@ -1,20 +1,8 @@
+@tailwind components;
+@tailwind utilities;
+
 body {
-  max-width: 1100px;
-  margin: 0 auto;
-  height: 100%;
   font-family: "Roboto Condensed", sans-serif;
-  background-color: rgb(244, 243, 245);
-}
-
-.app {
-  background-color: #fff;
-  padding: 0 20px;
-  min-height: 100vh;
-}
-
-.login,
-.out {
-  border: 1px solid black;
 }
 
 .loader {
@@ -32,5 +20,4 @@ body {
   gap: 30px;
   grid-template-columns: repeat(3, 1fr);
 }
-
 

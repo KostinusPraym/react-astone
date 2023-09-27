@@ -1,18 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { Vinyl } from "../../pages/Home/Home";
 import {
   useAddInFavoritesMutation,
   useGetFavoritesByIdQuery,
   useRemoveFromFavoritesMutation,
-} from "../../redux/favoritesApi";
+} from "../../redux/rtkQuery/favoritesApi";
 import { useAppSelector } from "../../hooks/redux-hooks";
 
-import FavoriteIcons from "./FavoriteIcons/FavoriteIcons";
-
-import s from "./Card.module.scss";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 type Props = {
   vinyl: Vinyl;
@@ -24,11 +23,10 @@ const Card = ({ vinyl }: Props) => {
   const [removeFavorites] = useRemoveFromFavoritesMutation();
   const { uid } = useAppSelector((state) => state.auth);
   const genre = vinyl.genre.join(", ");
-  const { data: favoriteVinyl, isLoading } = useGetFavoritesByIdQuery({
+  const { data: favoriteVinyl, isFetching } = useGetFavoritesByIdQuery({
     id: vinyl.id,
     uid,
   });
-
   const changeStatusFavorites = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!uid) {
@@ -43,22 +41,41 @@ const Card = ({ vinyl }: Props) => {
   };
 
   return (
-    <Link to={`/card/${vinyl.id}`} className={s.card}>
-      <img width={300} height={250} src={vinyl.coverImage} alt="vinyl cover" />
-      <div className={s.optionsWrapper}>
-        <div className={s.options}>
-          <h2 className={s.author}>{vinyl.author}</h2>
-          <p className={s.price}>{vinyl.price}$</p>
-          <p className={s.genre}>{genre}</p>
+    <Link
+      className="h-[21.8rem] w-[18.8rem] hover:bg-gray-100"
+      to={`/card/${vinyl.id}`}
+    >
+      <img
+        className="h-[15.6rem] w-[18.8rem]"
+        src={vinyl.coverImage}
+        alt="vinyl cover"
+      />
+      <div className="flex justify-between">
+        <div className="flex flex-col p-2">
+          <h2 className="mb-[0.3rem] text-lg">{vinyl.author}</h2>
+          <p className="mb-[0.3rem] text-lg font-bold">{vinyl.price}$</p>
+          <p className="text-sm text-gray-500">{genre}</p>
         </div>
-        <FavoriteIcons
+        <FavoriteButton
           favoriteVinyl={favoriteVinyl}
-          isLoading={isLoading}
           changeStatusFavorites={changeStatusFavorites}
+          isFetching={isFetching}
         />
       </div>
     </Link>
   );
+};
+
+Card.propTypes = {
+  vinyl: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    genre: PropTypes.array.isRequired,
+    mediaType: PropTypes.string.isRequired,
+    edition: PropTypes.string.isRequired,
+    coverImage: PropTypes.string.isRequired,
+  }),
 };
 
 export default Card;
