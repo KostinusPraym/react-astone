@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 
 import { logout } from "../actions/authActions";

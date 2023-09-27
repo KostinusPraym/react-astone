@@ -56,9 +56,9 @@ export const checkAuth = createAsyncThunk(
     try {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          dispatch(setUser({ email: user.email, uid: user.uid }));
+          return dispatch(setUser({ email: user.email, uid: user.uid }));
         } else {
-          dispatch(userNotFound());
+          return dispatch(userNotFound());
         }
       });
     } catch (error) {
