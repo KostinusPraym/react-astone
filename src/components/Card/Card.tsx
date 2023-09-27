@@ -42,7 +42,7 @@ const Card = ({ vinyl }: Props) => {
 
   return (
     <Link
-      className="h-[21.8rem] w-[18.8rem] hover:bg-gray-100"
+      className="w-[18.8rem] hover:bg-gray-100"
       to={`/card/${vinyl.id}`}
     >
       <img
