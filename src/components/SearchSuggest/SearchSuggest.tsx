@@ -1,16 +1,23 @@
-import { Vinyl } from "../../redux/rtkQuery/vinylsApi";
 import SearchItem from "../SearchPanel/SearchItem/SearchItem";
+import { useGetSearchSuggestQuery } from "../../redux/rtkQuery/vinylsApi";
 
 type Props = {
-  vinyls: Vinyl[];
-  searchValue: string;
+  debouncedSearch: string;
   handleSubmit: (value: React.FormEvent) => void;
 };
 
-const SearchSuggest = ({ vinyls, searchValue, handleSubmit }: Props) => {
+const SearchSuggest = ({
+  debouncedSearch,
+  handleSubmit,
+}: Props) => {
+
+  const { data: vinyls } = useGetSearchSuggestQuery({
+    search: debouncedSearch
+  });
+
   return (
     <>
-      {searchValue && (
+      {(debouncedSearch && vinyls) && (
         <ul className="absolute right-0 z-10 flex w-[250px] flex-col gap-[4px] overflow-hidden bg-white">
           {vinyls.map((vinyl) => {
             return <SearchItem key={vinyl.id} vinyl={vinyl} />;
@@ -19,7 +26,7 @@ const SearchSuggest = ({ vinyls, searchValue, handleSubmit }: Props) => {
             <button type="submit" onSubmit={handleSubmit}>
               Показать результаты по запросу:
               <span style={{ fontWeight: "700", marginLeft: "4px" }}>
-                "{searchValue}"
+                "{debouncedSearch}"
               </span>
             </button>
           </li>

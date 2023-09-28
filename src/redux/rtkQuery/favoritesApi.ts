@@ -36,7 +36,7 @@ export const favoritesApi = createApi({
     getFavoritesById: build.query<ResponseParams, QueryParams>({
       query: ({ id, uid }) => {
         return {
-          url: `favorites/${uid}/${"0" + id}.json`,
+          url: `favorites/${uid}/${"isFavorite" + id}.json`,
         };
       },
       providesTags: (_, __, { id }) => [{ type: "Favorites", id }],
@@ -44,7 +44,7 @@ export const favoritesApi = createApi({
     addInFavorites: build.mutation({
       query: ({ vinyl, uid }) => {
         return {
-          url: `favorites/${uid}/${"0" + vinyl.id}.json`,
+          url: `favorites/${uid}/${"isFavorite" + vinyl.id}.json`,
           method: "POST",
           body: vinyl,
         };
@@ -56,7 +56,7 @@ export const favoritesApi = createApi({
     removeFromFavorites: build.mutation({
       query: ({ id, uid }) => {
         return {
-          url: `favorites/${uid}/${"0" + id}.json`,
+          url: `favorites/${uid}/${"isFavorite" + id}.json`,
           method: "DELETE",
         };
       },

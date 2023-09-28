@@ -7,7 +7,7 @@ import NotFoundBySearch from "../../components/NotFoundBySearch/NotFoundBySearch
 import SearchPanel from "../../components/SearchPanel/SearchPanel";
 
 import { setSearchValue } from "../../redux/slices/searchSlice";
-import { useGetVinylsQuery } from "../../redux/rtkQuery/vinylsApi";
+import { useGetVinylsBySearchQuery } from "../../redux/rtkQuery/vinylsApi";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 
 const SearchPage = () => {
@@ -19,7 +19,7 @@ const SearchPage = () => {
     data: vinyls,
     isLoading,
     isFetching,
-  } = useGetVinylsQuery({
+  } = useGetVinylsBySearchQuery({
     search: searchQueryParam,
   });
 

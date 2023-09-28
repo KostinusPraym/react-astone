@@ -24,7 +24,12 @@ export const vinylsApi = createApi({
     baseUrl: BASE_URL,
   }),
   endpoints: (build) => ({
-    getVinyls: build.query<Vinyl[], QueryParams>({
+    getVinyls: build.query<Vinyl[], void>({
+      query: () => ({
+        url: "records",
+      }),
+    }),
+    getVinylsBySearch: build.query<Vinyl[], QueryParams>({
       query: ({ search }) => {
         return {
           url: "records",
@@ -38,7 +43,7 @@ export const vinylsApi = createApi({
       }),
     }),
     getSearchSuggest: build.query<Vinyl[], QueryParams>({
-      query: ({ search = "", limit = 0, page = 1 }) => {
+      query: ({ search = "", limit = 5, page = 1 }) => {
         return {
           url: "records",
           params: { search, limit, page },
@@ -52,4 +57,5 @@ export const {
   useGetVinylsQuery,
   useGetVinylsByIdQuery,
   useGetSearchSuggestQuery,
+  useGetVinylsBySearchQuery,
 } = vinylsApi;

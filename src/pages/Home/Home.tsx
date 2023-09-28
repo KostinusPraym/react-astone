@@ -5,7 +5,7 @@ import SearchPanel from "../../components/SearchPanel/SearchPanel";
 import { useGetVinylsQuery } from "../../redux/rtkQuery/vinylsApi";
 
 const Home = () => {
-  const { data: vinyls, isLoading } = useGetVinylsQuery({ search: "" });
+  const { data: vinyls, isLoading } = useGetVinylsQuery();
 
   if (isLoading) {
     return <Preloader />;
