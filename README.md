@@ -32,8 +32,6 @@
 - Используется RTK Query: [favoritesApi](https://github.com/KostinusPraym/react-astone/blob/main/src/redux/rtkQuery/favoritesApi.ts), [historyApi](https://github.com/KostinusPraym/react-astone/blob/main/src/redux/rtkQuery/historyApi.ts), [vinylsApi](https://github.com/KostinusPraym/react-astone/blob/main/src/redux/rtkQuery/vinylsApi.ts).
 - Используется Transforming Responses: [favoritesApi](https://github.com/KostinusPraym/react-astone/blob/main/src/redux/rtkQuery/favoritesApi.ts).
 
-https://github.com/KostinusPraym/react-astone/
-
 ## 2 уровень
 
 - Использован TypeScript.
