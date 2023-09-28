@@ -42,5 +42,9 @@
   2. [x] Флаг должен присылаться с локального сервера. Для этого нужно написать простой сервер, который по http-запросу на /api/feature-flags отдаст объект с флагом { isTelegramShareEnabled: true } [server](https://github.com/KostinusPraym/react-astone/tree/main/server);
   3. [x] Флаг положить в react context, забрать из контекста в необходимом месте приложения и включить фичу.[FeatureProvider](https://github.com/KostinusPraym/react-astone/blob/main/src/components/FeatureProvider/FeatureProvider.tsx).
 
-  ###Deploy link
-  [Vinyl Music](https://vinyls-store.netlify.app)
+## Дополнительно
+- В проекте использовалась библиотека Tailwind CSS для стилизации компонентов.
+- Для одновременного запуска клиентской и серверной частей проекта, использовалась библиотека Concurrently.
+
+###Deploy link
+[Vinyl Music](https://vinyls-store.netlify.app)
