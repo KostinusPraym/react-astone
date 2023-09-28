@@ -1,12 +1,11 @@
-import qs from "qs";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useDebounce } from "../../hooks/use-debounce";
+import { useDebounce } from "../../hooks/useDebounce";
 import SearchSuggest from "../SearchSuggest/SearchSuggest";
 import { setSearchValue } from "../../redux/slices/searchSlice";
 import { useAddInHistoryMutation } from "../../redux/rtkQuery/historyApi";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -25,11 +24,7 @@ const Search = () => {
       return;
     }
 
-    const queryString = qs.stringify({
-      search: debouncedSearch,
-    });
-
-    navigate(`/search-page?${queryString}`);
+    navigate(`/search-page?search=${debouncedSearch}`);
 
     if (uid) {
       await addInHistory({
@@ -60,7 +55,7 @@ const Search = () => {
           onBlur={() => setTimeout(() => setShowSuggest(false), 200)}
         />
       </div>
-      {(isShowSuggest && debouncedSearch) ? (
+      {isShowSuggest && debouncedSearch ? (
         <SearchSuggest
           handleSubmit={handleSubmit}
           debouncedSearch={debouncedSearch}

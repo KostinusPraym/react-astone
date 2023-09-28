@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { useAppSelector } from "../../hooks/redux-hooks";
+import { useAppSelector } from "../../hooks/reduxHooks";
 import { useRemoveFromHistoryMutation } from "../../redux/rtkQuery/historyApi";
 
 type Props = {

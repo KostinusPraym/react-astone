@@ -8,11 +8,11 @@ import SearchPanel from "../../components/SearchPanel/SearchPanel";
 
 import { setSearchValue } from "../../redux/slices/searchSlice";
 import { useGetVinylsBySearchQuery } from "../../redux/rtkQuery/vinylsApi";
-import { useAppDispatch } from "../../hooks/redux-hooks";
+import { useAppDispatch } from "../../hooks/reduxHooks";
 
 const SearchPage = () => {
   const dispatch = useAppDispatch();
-  
+
   const [searchParams] = useSearchParams();
   const searchQueryParam = searchParams.get("search");
   const {
@@ -40,7 +40,10 @@ const SearchPage = () => {
         <>
           <SearchPanel />
           {vinyls.length ? (
-            <FoundBySearch searchQueryParam={searchQueryParam} vinyls={vinyls}/>
+            <FoundBySearch
+              searchQueryParam={searchQueryParam}
+              vinyls={vinyls}
+            />
           ) : (
             <NotFoundBySearch searchQueryParam={searchQueryParam} />
           )}

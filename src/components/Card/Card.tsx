@@ -9,7 +9,7 @@ import {
   useGetFavoritesByIdQuery,
   useRemoveFromFavoritesMutation,
 } from "../../redux/rtkQuery/favoritesApi";
-import { useAppSelector } from "../../hooks/redux-hooks";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
@@ -41,10 +41,7 @@ const Card = ({ vinyl }: Props) => {
   };
 
   return (
-    <Link
-      className="w-[18.8rem] hover:bg-gray-100"
-      to={`/card/${vinyl.id}`}
-    >
+    <Link className="w-[18.8rem] hover:bg-gray-100" to={`/card/${vinyl.id}`}>
       <img
         className="h-[15.6rem] w-[18.8rem]"
         src={vinyl.coverImage}

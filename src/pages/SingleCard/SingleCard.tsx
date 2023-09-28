@@ -12,7 +12,7 @@ import {
   useGetFavoritesByIdQuery,
   useRemoveFromFavoritesMutation,
 } from "../../redux/rtkQuery/favoritesApi";
-import { useAppSelector } from "../../hooks/redux-hooks";
+import { useAppSelector } from "../../hooks/reduxHooks";
 import { useGetVinylsByIdQuery } from "../../redux/rtkQuery/vinylsApi";
 import { FeatureContext } from "../../context";
 

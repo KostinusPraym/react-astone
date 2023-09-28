@@ -8,8 +8,8 @@ import {
 import { lazy, Suspense } from "react";
 
 import Preloader from "../components/Preloaders/Preloader";
-import { useAuth } from "../hooks/use-auth";
-import { useAppSelector } from "../hooks/redux-hooks";
+import { useAuth } from "../hooks/useAuth";
+import { useAppSelector } from "../hooks/reduxHooks";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 const History = lazy(() => import("../pages/History/History"));

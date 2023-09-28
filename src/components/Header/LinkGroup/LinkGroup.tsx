@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { useAppDispatch } from "../../../hooks/redux-hooks";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { logout } from "../../../redux/actions/authActions";
 
 type Props = {

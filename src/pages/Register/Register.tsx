@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import Form from "../../components/Form/Form";
 
-import { useAppDispatch } from "../../hooks/redux-hooks";
+import { useAppDispatch } from "../../hooks/reduxHooks";
 import { registrationAction } from "../../redux/actions/authActions";
 
 const Register = () => {

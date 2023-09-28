@@ -2,12 +2,12 @@ import Card from "../../components/Card/Card";
 import Preloader from "../../components/Preloaders/Preloader";
 
 import { useGetFavoritesQuery } from "../../redux/rtkQuery/favoritesApi";
-import { useAppSelector } from "../../hooks/redux-hooks";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 const Favorites = () => {
   const { uid } = useAppSelector((state) => state.auth);
   const { data = [], isFetching, isLoading } = useGetFavoritesQuery(uid);
-  
+
   if (isFetching || isLoading) {
     return <Preloader />;
   }

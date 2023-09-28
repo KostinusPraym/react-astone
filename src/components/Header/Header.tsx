@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-import { useAuth } from "../../hooks/use-auth";
-import { useAppSelector } from "../../hooks/redux-hooks";
+import { useAuth } from "../../hooks/useAuth";
+import { useAppSelector } from "../../hooks/reduxHooks";
 import Preloader from "../Preloaders/Preloader";
 
 import LinkGroup from "./LinkGroup/LinkGroup";
