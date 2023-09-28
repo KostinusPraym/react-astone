@@ -46,5 +46,5 @@
 - В проекте использовалась библиотека Tailwind CSS для стилизации компонентов.
 - Для одновременного запуска клиентской и серверной частей проекта, использовалась библиотека Concurrently.
 
-###Deploy link
+### Deploy link
 [Vinyl Music](https://vinyls-store.netlify.app)
