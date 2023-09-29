@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 
+import { authSelectors } from "../../redux";
 import { useAuth } from "../../hooks/useAuth";
 import { useAppSelector } from "../../hooks/reduxHooks";
+
 import Preloader from "../Preloaders/Preloader";
 
 import LinkGroup from "./LinkGroup/LinkGroup";
 
 const Header = () => {
   const { isAuth, email } = useAuth();
-  const { statusAuth } = useAppSelector((state) => state.auth);
+  const statusAuth = useAppSelector(authSelectors.status);
 
   if (statusAuth !== "SUCCESS") {
     return <Preloader />;

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { useRemoveFromHistoryMutation } from "../../redux/rtkQuery/historyApi";
+import { authSelectors } from "../../redux";
 
 type Props = {
   search: string;
@@ -10,7 +11,7 @@ type Props = {
 };
 
 const HistoryItem = ({ search, uniqKey, searchUrl }: Props) => {
-  const { uid } = useAppSelector((state) => state.auth);
+  const uid = useAppSelector(authSelectors.uid);
   const [removeFromHistory] = useRemoveFromHistoryMutation();
 
   return (

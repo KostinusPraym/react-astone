@@ -15,11 +15,12 @@ import {
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { useGetVinylsByIdQuery } from "../../redux/rtkQuery/vinylsApi";
 import { FeatureContext } from "../../context";
+import { authSelectors } from "../../redux";
 
 const SingleCard = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { uid } = useAppSelector((state) => state.auth);
+  const  uid = useAppSelector(authSelectors.uid);
   const { isTelegramShareEnabled } = useContext(FeatureContext);
 
   const [addFavorites] = useAddInFavoritesMutation();

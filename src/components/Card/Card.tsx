@@ -10,6 +10,7 @@ import {
   useRemoveFromFavoritesMutation,
 } from "../../redux/rtkQuery/favoritesApi";
 import { useAppSelector } from "../../hooks/reduxHooks";
+import { authSelectors } from "../../redux";
 
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
@@ -21,7 +22,8 @@ const Card = ({ vinyl }: Props) => {
   const navigate = useNavigate();
   const [addFavorites] = useAddInFavoritesMutation();
   const [removeFavorites] = useRemoveFromFavoritesMutation();
-  const { uid } = useAppSelector((state) => state.auth);
+  const uid = useAppSelector(authSelectors.uid);
+
   const genre = vinyl.genre.join(", ");
   const { data: favoriteVinyl, isFetching } = useGetFavoritesByIdQuery({
     id: vinyl.id,

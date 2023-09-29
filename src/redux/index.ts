@@ -26,5 +26,7 @@ export const store = configureStore({
       .concat(listenerMiddleware.middleware),
 });
 
+export * as authSelectors from "./selectors/authSelectors";
+export * as searchSelectors from "./selectors/searchSelectors";
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

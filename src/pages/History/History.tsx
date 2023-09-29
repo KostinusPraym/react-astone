@@ -3,9 +3,10 @@ import Preloader from "../../components/Preloaders/Preloader";
 
 import { useGetHistoryQuery } from "../../redux/rtkQuery/historyApi";
 import { useAppSelector } from "../../hooks/reduxHooks";
+import { authSelectors } from "../../redux";
 
 const History = () => {
-  const { uid } = useAppSelector((state) => state.auth);
+  const  uid = useAppSelector(authSelectors.uid);
   const { data, isFetching, isLoading } = useGetHistoryQuery(uid);
 
   if (isFetching || isLoading) {

@@ -3,9 +3,10 @@ import Preloader from "../../components/Preloaders/Preloader";
 
 import { useGetFavoritesQuery } from "../../redux/rtkQuery/favoritesApi";
 import { useAppSelector } from "../../hooks/reduxHooks";
+import { authSelectors } from "../../redux";
 
 const Favorites = () => {
-  const { uid } = useAppSelector((state) => state.auth);
+  const  uid = useAppSelector(authSelectors.uid);
   const { data = [], isFetching, isLoading } = useGetFavoritesQuery(uid);
 
   if (isFetching || isLoading) {

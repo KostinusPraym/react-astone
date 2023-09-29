@@ -1,7 +1,9 @@
+import { authSelectors } from "../redux";
+
 import { useAppSelector } from "./reduxHooks";
 
 export function useAuth() {
-  const { email } = useAppSelector((state) => state.auth);
+  const email = useAppSelector(authSelectors.email);
 
   return {
     isAuth: !!email,

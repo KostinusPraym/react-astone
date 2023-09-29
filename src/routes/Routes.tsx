@@ -10,6 +10,7 @@ import { lazy, Suspense } from "react";
 import Preloader from "../components/Preloaders/Preloader";
 import { useAuth } from "../hooks/useAuth";
 import { useAppSelector } from "../hooks/reduxHooks";
+import { authSelectors } from "../redux";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 const History = lazy(() => import("../pages/History/History"));
@@ -40,7 +41,7 @@ const RedirectAfterSuccessAuth = ({ isAuth, statusAuth }: Props) => {
 };
 
 const Public = () => {
-  const { statusAuth } = useAppSelector((state) => state.auth);
+  const statusAuth = useAppSelector(authSelectors.status);
   const { isAuth } = useAuth();
   return (
     <BrowserRouter>

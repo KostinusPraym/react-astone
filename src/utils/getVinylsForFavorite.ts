@@ -13,7 +13,7 @@ type FavoritesById = FavoriteItem[];
  * @param data
  * @returns Vinyl[]
  */
-export function getVinylsForFavorite(data: ResponseParams | undefined) {
+export function getVinylsForFavorite(data: ResponseParams | undefined) : Vinyl[] | never[] {
   if (!data) {
     return [];
   }
